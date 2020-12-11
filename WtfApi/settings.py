@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authenticate',
     'TheApi',
-    'rest_framework'
+    'rest_framework',
+    'django_filters'
 ]
 
 AUTH_USER_MODEL = "authenticate.User"
@@ -129,4 +130,7 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600),
     'JWT_RESPONSE_PAYLOAD_HANDLER':
         'authenticate.utils.jwt_response_payload_handler'
+}
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
