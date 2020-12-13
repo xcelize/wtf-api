@@ -16,6 +16,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     pays = models.CharField(max_length=30, null=True)
     is_staff = models.BooleanField(default=False)
 
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 

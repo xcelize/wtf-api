@@ -1,5 +1,5 @@
-from .models import Films
-from rest_framework.generics import RetrieveAPIView, ListAPIView
+from .models import Films, Score
+from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
 from .serializers import FilmSerializer
 
 
@@ -17,4 +17,10 @@ class ListFilmView(ListAPIView):
 
     def get_queryset(self):
         return Films.objects.all()
+
+
+
+
+
+
 
