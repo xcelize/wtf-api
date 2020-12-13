@@ -21,15 +21,12 @@ class Acteurs(models.Model):
 
 
 class Categories(models.Model):
-    id_categ = models.IntegerField(primary_key=True)
+    id_categ = models.IntegerField()
     libelle = models.CharField(max_length=254, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'categories'
-
-    def __str__(self):
-        return f'{self.libelle}'
 
 
 class Equipe(models.Model):
@@ -103,21 +100,14 @@ class Films(models.Model):
     vo = models.CharField(max_length=254, blank=True, null=True)
     duree = models.CharField(max_length=254, blank=True, null=True)
     acteurs = models.ManyToManyField(to=Acteurs, through=FilmActeurs, symmetrical=False)
-    productions = models.ManyToManyField(to="Productions", through=FilmProductions, symmetrical=False)
-    categories = models.ManyToManyField(to=Categories, through=FilmCategories, symmetrical=False)
 
     class Meta:
         managed = False
         db_table = 'films'
-        verbose_name = 'Film'
-        verbose_name_plural = 'Films'
-
-    def __str__(self):
-        return f'{self.titre}'
 
 
 class Productions(models.Model):
-    id_production = models.IntegerField(primary_key=True)
+    id_production = models.IntegerField()
     logo = models.CharField(max_length=254, blank=True, null=True)
     nom = models.CharField(max_length=254, blank=True, null=True)
     pays = models.CharField(max_length=254, blank=True, null=True)

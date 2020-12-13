@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Films, Acteurs, Productions, Categories
+from .models import Films, Acteurs
 
 
 class ActeurSerializer(serializers.ModelSerializer):
@@ -9,25 +9,9 @@ class ActeurSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ProductionSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Productions
-        fields = '__all__'
-
-
-class CategorieSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Categories
-        fields = '__all__'
-
-
 class FilmSerializer(serializers.ModelSerializer):
 
     acteurs = ActeurSerializer(many=True)
-    productions = ProductionSerializer(many=True)
-    categories = CategorieSerializer(many=True)
 
     class Meta:
         model = Films
@@ -39,7 +23,5 @@ class FilmSerializer(serializers.ModelSerializer):
             'plot',
             'vo',
             'duree',
-            'categories',
-            'productions',
             'acteurs'
         ]
