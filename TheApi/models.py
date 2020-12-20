@@ -103,7 +103,6 @@ class Films(models.Model):
     duree = models.CharField(max_length=254, blank=True, null=True)
     categories = models.ManyToManyField(to=Categories, through=FilmCategories, symmetrical=False)
     productions = models.ManyToManyField(to='Productions', through=FilmProductions, symmetrical=False)
-    acteurs = models.ManyToManyField(to=Acteurs, through=FilmActeurs, symmetrical=False)
     scores = models.ManyToManyField(to='Score', through='ScoreFilm', symmetrical=False)
 
     class Meta:
@@ -134,6 +133,73 @@ class Score(models.Model):
 
     user = models.ForeignKey(get_user_model(), on_delete=models.DO_NOTHING, unique=True)
     score = models.IntegerField()
+
+
+class Saisons(models.Model):
+    id_saison = models.IntegerField(primary_key=True)
+    nb_episode = models.CharField(max_length=254, blank=True, null=True)
+    nom = models.CharField(max_length=254, blank=True, null=True)
+    num_saison = models.CharField(max_length=254, blank=True, null=True)
+    id_serie = models.ForeignKey('Series', models.DO_NOTHING, db_column='id_serie', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'saisons'
+
+
+class SerieCategories(models.Model):
+    serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
+    categorie = models.ForeignKey(Categories, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'serie_categories'
+
+
+class Plateformes(models.Model):
+    id_plateforme = models.IntegerField(primary_key=True)
+    nom = models.CharField(max_length=254, blank=True, null=True)
+    logo = models.CharField(max_length=254, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'plateformes'
+
+
+class SeriePlateformes(models.Model):
+    serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
+    plateforme = models.ForeignKey(Plateformes, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'serie_plateformes'
+
+
+class SerieProductions(models.Model):
+    serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
+    production = models.ForeignKey(Productions, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'serie_productions'
+
+
+class Series(models.Model):
+
+    id_video = models.IntegerField(primary_key=True)
+    titre = models.CharField(max_length=254, blank=True, null=True)
+    date_sortie = models.CharField(max_length=254, blank=True, null=True)
+    poster = models.CharField(max_length=254, blank=True, null=True)
+    plot = models.CharField(max_length=254, blank=True, null=True)
+    vo = models.CharField(max_length=254, blank=True, null=True)
+    nb_saison = models.IntegerField(blank=True, null=True)
+    categories = models.ManyToManyField(to=Categories, through=SerieCategories, symmetrical=False)
+    productions = models.ManyToManyField(to='Productions', through=SerieProductions, symmetrical=False)
+
+
+    class Meta:
+        managed = False
+        db_table = 'series'
 
 
 

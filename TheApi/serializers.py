@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Films, Acteurs, Categories, Productions, Score
+from .models import Films, Acteurs, Categories, Productions, Score, Series, Saisons
 
 
 class ActeurSerializer(serializers.ModelSerializer):
@@ -30,9 +30,20 @@ class ScoreSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class SaisonSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Saisons
+        fields = [
+            'id_saison',
+            'nb_episode',
+            'nom',
+            'num_saison'
+        ]
+
+
 class FilmSerializer(serializers.ModelSerializer):
 
-    acteurs = ActeurSerializer(many=True)
     categories = CategorieSerializer(many=True)
     productions = ProductionSerializer(many=True)
     scores = ScoreSerializer(many=True)
@@ -50,8 +61,32 @@ class FilmSerializer(serializers.ModelSerializer):
             'duree',
             'categories',
             'productions',
-            'acteurs'
         ]
+
+
+class SerieSerializer(serializers.ModelSerializer):
+
+    categories = CategorieSerializer(many=True)
+    productions = ProductionSerializer(many=True)
+    saisons = SaisonSerializer(source='saisons_set', many=True)
+
+    class Meta:
+        model = Series
+        fields = [
+            'id_video',
+            'titre',
+            'date_sortie',
+            'poster',
+            'plot',
+            'vo',
+            'nb_saison',
+            'categories',
+            'productions',
+            'saisons'
+        ]
+
+
+
 
 
 
