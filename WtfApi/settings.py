@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
+    'drf_multiple_model',
     'corsheaders',
     'authenticate',
     'TheApi',
@@ -137,6 +139,10 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600),
     'JWT_RESPONSE_PAYLOAD_HANDLER':
         'authenticate.utils.jwt_response_payload_handler'
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 if DEBUG is False:
