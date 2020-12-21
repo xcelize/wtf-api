@@ -42,15 +42,19 @@ class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = RatingFilms
         fields = [
+            "id",
             'user',
+            'film',
             'note'
         ]
+        read_only_fields = ['id']
 
 class RatingFilmsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RatingFilms
         fields = ['id', 'note', 'user']
+
 
 
 class FilmSerializer(serializers.ModelSerializer):

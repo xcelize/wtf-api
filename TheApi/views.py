@@ -1,6 +1,15 @@
-from .models import Films, Series
+from .models import Films, Series, RatingFilms
 from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
-from .serializers import FilmSerializer, SerieSerializer
+from .serializers import FilmSerializer, SerieSerializer, RatingSerializer
+from rest_framework import permissions
+
+
+class isOwnerOrReadOnly(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        print(obj.user)
+        print(request.user)
+        return obj.user == request.user
 
 
 class RetrieveFilmView(RetrieveAPIView):
@@ -34,6 +43,26 @@ class RetrieveSerieView(RetrieveAPIView):
 
     def get_queryset(self):
         return Series.objects.all()
+
+
+class CreateRatingFilm(CreateAPIView):
+
+    serializer_class = RatingSerializer
+
+    def get_queryset(self):
+        return RatingFilms.objects.all()
+
+
+class UpdateRatingFilm(UpdateAPIView):
+
+    lookup_field = "pk"
+    serializer_class = RatingSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
+
+    def get_queryset(self):
+        return RatingFilms.objects.all()
+
+
 
 
 

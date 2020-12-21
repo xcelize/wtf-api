@@ -111,7 +111,7 @@ class Films(models.Model):
 
 class RatingFilms(models.Model):
 
-    id = models.IntegerField(primary_key=True, auto_created=True)
+    id = models.AutoField(primary_key=True, auto_created=True)
     film = models.ForeignKey(Films, models.DO_NOTHING, db_column='id_film')
     user = models.ForeignKey(get_user_model(), models.DO_NOTHING, db_column='id_user')
     note = models.IntegerField(blank=True, null=True)

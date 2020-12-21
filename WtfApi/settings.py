@@ -141,7 +141,6 @@ JWT_AUTH = {
 
 if DEBUG is False:
 
-
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
     # Extra places for collectstatic to find static files.
