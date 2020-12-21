@@ -25,6 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = ('user',)
         verbose_name_plural = ('users',)
+        db_table = 'user'
 
     def get_full_name(self):
         return f'{self.nom} - {self.prenom}'
