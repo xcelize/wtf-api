@@ -152,7 +152,7 @@ python manage.py runserver
 ```
 
 **PUT** /api/films/rating/<int:pk>
-- /!\ Si un utilisateur autre que celui qui a voter essaye de voter il y a un accès refusé. /!\
+- /!\ Si un utilisateur autre que celui qui a voté essaye de voter il y a un accès refusé. /!\
 ```
 "film": id_video,
 "note": [1-5]
@@ -260,8 +260,9 @@ python manage.py runserver
 
 Ceci est appliquable aux films et aux séries
 
-- **GET** /api/series?titre=<string>
- /api/series?titre=message
+- **GET** /api/series?titre=string
+ 
+> /api/series?titre=message
 
 <details>
 <summary><b>Résultat</b></summary>
