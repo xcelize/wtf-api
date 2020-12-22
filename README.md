@@ -242,6 +242,10 @@ python manage.py runserver
  Plusieurs paramètres de recherche peuvent être renseignés, ils sont facultatifs et peuvent être renseignés dans le désordre:
  /api/series?categories=35&date_sortie=&vo=en&titre=message
  
+ <details>
+ <summary>Résultat</summary>
+ <p>
+  
   ```json
   {
         "id_video": 3,
@@ -250,6 +254,9 @@ python manage.py runserver
         ...
   }
  ```
+ 
+ </p>
+ </details>
  
  Les paramètres de recherche sont :
  * titre => Recherche les séries qui contiennent la chaîne renseignée.
