@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'c7b#iil47q6bu!cb=8gbtb(midwevo7g0pw1)fbr4saa%!q((e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -139,8 +139,13 @@ JWT_AUTH = {
         'authenticate.utils.jwt_response_payload_handler'
 }
 
-if DEBUG is False:
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
 
+if DEBUG is False:
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

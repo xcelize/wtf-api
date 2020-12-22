@@ -1,23 +1,30 @@
-from .models import Films, Score, Series
+from .models import Films, Series, RatingFilms
 from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
-from .serializers import FilmSerializer, SerieSerializer
+from .serializers import FilmSerializer, SerieSerializer, RatingSerializer
 from rest_framework import permissions
+
+
+class isOwnerOrReadOnly(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        print(obj.user)
+        print(request.user)
+        return obj.user == request.user
 
 
 class RetrieveFilmView(RetrieveAPIView):
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     lookup_field = 'id_video'
     serializer_class = FilmSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         return Films.objects.all()
 
 
 class ListFilmView(ListAPIView):
-
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = FilmSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         return Films.objects.all()
@@ -25,8 +32,8 @@ class ListFilmView(ListAPIView):
 
 class ListSerieView(ListAPIView):
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = SerieSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         return Series.objects.all()
@@ -34,12 +41,36 @@ class ListSerieView(ListAPIView):
 
 class RetrieveSerieView(RetrieveAPIView):
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = SerieSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     lookup_field = 'pk'
 
     def get_queryset(self):
         return Series.objects.all()
+
+
+class CreateRatingFilm(CreateAPIView):
+
+    serializer_class = RatingSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        return RatingFilms.objects.all()
+
+
+class UpdateRatingFilm(UpdateAPIView):
+
+    lookup_field = "pk"
+    serializer_class = RatingSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
+
+    def get_queryset(self):
+        return RatingFilms.objects.all()
+
+
+
+
+
 
 
 
