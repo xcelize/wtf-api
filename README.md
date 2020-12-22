@@ -106,3 +106,16 @@ L'api WTF-API vous donne accès à un large choix de films et de serie ainsi que
     "acteurs": []
 }
 ```
+
+**POST** /api/films/rating
+```
+"film": id_video,
+"note": [1-5]
+```
+
+**PUT** /api/films/rating/<int:pk>
+- /!\ Si un utilisateur autre que celui qui a voter essaye de voter il y a un accès refusé. /!\
+```
+"film": id_video,
+"note": [1-5]
+```

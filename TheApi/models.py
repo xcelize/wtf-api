@@ -106,11 +106,24 @@ class Films(models.Model):
     duree = models.IntegerField(blank=True, null=True)
     categories = models.ManyToManyField(to=Categories, through=FilmCategories, symmetrical=False)
     productions = models.ManyToManyField(to='Productions', through=FilmProductions, symmetrical=False)
-    scores = models.ManyToManyField(to='Score', through='ScoreFilm', symmetrical=False)
 
     class Meta:
         managed = False
         db_table = 'films'
+
+
+class RatingFilms(models.Model):
+
+    id = models.AutoField(primary_key=True, auto_created=True)
+    film = models.ForeignKey(Films, models.DO_NOTHING, db_column='id_film')
+    user = models.ForeignKey(get_user_model(), models.DO_NOTHING, db_column='id_user')
+    note = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'rating_films'
+        unique_together = ['film', 'user']
+
 
 
 class Productions(models.Model):
@@ -122,20 +135,6 @@ class Productions(models.Model):
     class Meta:
         managed = False
         db_table = 'productions'
-
-
-class ScoreFilm(models.Model):
-    score = models.ForeignKey(to='Score', on_delete=models.CASCADE)
-    film = models.ForeignKey(to=Films, on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ['score', 'film']
-
-
-class Score(models.Model):
-
-    user = models.ForeignKey(get_user_model(), on_delete=models.DO_NOTHING, unique=True)
-    score = models.IntegerField()
 
 
 class Saisons(models.Model):
