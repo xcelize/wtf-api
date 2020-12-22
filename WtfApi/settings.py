@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'authenticate',
     'TheApi',
-    'rest_framework'
+    'rest_framework',
+    'django_filters',
+    'drf_multiple_model'
 ]
 
 AUTH_USER_MODEL = "authenticate.User"
@@ -144,6 +146,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     )
 }
+
 
 if DEBUG is False:
 
