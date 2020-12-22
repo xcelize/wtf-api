@@ -2,8 +2,7 @@ from .models import Films, Series, RatingFilms
 from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
 from .serializers import FilmSerializer, SerieSerializer, RatingSerializer
 from rest_framework import permissions
-from .customfilters import FilmFilters
-from rest_framework.viewsets import ModelViewSet
+from .customfilters import FilmFilters, SerieFilters
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 from django_filters import rest_framework as filters
 
@@ -40,6 +39,7 @@ class ListSerieView(ListAPIView):
 
     serializer_class = SerieSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filterset_class = SerieFilters
 
     def get_queryset(self):
         return Series.objects.all()
