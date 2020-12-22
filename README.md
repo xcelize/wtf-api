@@ -262,9 +262,10 @@ Ceci est appliquable aux films et aux séries
 
 - **GET** /api/series?titre=<string>
  /api/series?titre=message
- <details>
-  <summary><b>Résultat</b></summary>
- <p>
+
+<details>
+<summary><b>Résultat</b></summary>
+<p>
  
  ```json
   {
@@ -274,12 +275,13 @@ Ceci est appliquable aux films et aux séries
         ...
   }
  ```
- 
+
  <p>
  </details>
  
  Plusieurs paramètres de recherche peuvent être renseignés, ils sont facultatifs et peuvent être renseignés dans le désordre:
- /api/series?categories=35&date_sortie=&vo=en&titre=message
+ 
+ > `/api/series?categories=35&date_sortie=&vo=en&titre=message`
  
  <details>
  <summary><b>Résultat</b></summary>
@@ -297,11 +299,11 @@ Ceci est appliquable aux films et aux séries
  </p>
  </details>
  
- Les paramètres de recherche sont :
- * titre => Recherche les séries qui contiennent la chaîne renseignée.
- * categories => Avec les catégories renseignées. Ex: Aventure OU Drame OU Action : &categories=12&categories=18&categories=28
- * date_sortie => Fourchette de dates. Ex: Séries sorties entre 2000 et 2008: &start_date=2001-01-01&end_date=2008-12-31
- * vo => Recherche les séries qui ont comme bande originale la chaîne renseignée.
+Les paramètres de recherche sont :
+* titre => Recherche les séries qui contiennent la chaîne renseignée.
+* categories => Avec les catégories renseignées. Ex: Aventure OU Drame OU Action : `&categories=12&categories=18&categories=28`
+* date_sortie => Fourchette de dates. Ex: Séries sorties entre 2000 et 2008: `&start_date=2001-01-01&end_date=2008-12-31`
+* vo => Recherche les séries qui ont comme bande originale la chaîne renseignée.
  
  Paramètre spécifiques aux films :
  * duree => Recherche les films qui durent moins de temps que la valeur renseignée (en minutes)
