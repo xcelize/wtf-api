@@ -256,7 +256,8 @@ python manage.py runserver
 </p>
 </details>
 
-**RECHERCHE**
+# RECHERCHE
+
 Ceci est appliquable aux films et aux séries
 
 - **GET** /api/series?titre=<string>
