@@ -77,6 +77,10 @@ python manage.py runserver
 **Section Films**
 
 - **GET** /api/films
+<details>
+ <summary><b>Résultat</b></summary>
+ <p>
+
 ```json
 {
     "id_video": 12,
@@ -110,8 +114,16 @@ python manage.py runserver
   }
 ```
 
+</p>
+</details>
+
 
 - **GET** /api/films/<int:id_film>
+
+<details>
+ <summary><b>Résultat</b></summary>
+ <p>
+  
 ```json
 {
     "id_video": 12,
@@ -130,6 +142,8 @@ python manage.py runserver
 }
 ```
 
+</p>
+</details>
 
 **POST** /api/films/rating
 ```
@@ -147,6 +161,11 @@ python manage.py runserver
 **Section Séries**
 
 - **GET** /api/series
+
+<details>
+ <summary><b>Résultat</b></summary>
+ <p>
+  
 ```json
  {
         "id_video": 1,
@@ -198,7 +217,15 @@ python manage.py runserver
     }
 ```
 
+</p>
+</details>
+
+
 - **GET** /api/series/<int:id_serie>
+<details>
+ <summary><b>Résultat</b></summary>
+ <p>
+  
 ```json
 {
     "id_video": 3,
@@ -226,9 +253,15 @@ python manage.py runserver
 }
 ```
 
+</p>
+</details>
+
 [ RECHERCHE ]
 - **GET** /api/series?titre=<string>
  /api/series?titre=message
+ <details>
+  <summary><b>Résultat</b></summary>
+ <p>
  
  ```json
   {
@@ -239,11 +272,14 @@ python manage.py runserver
   }
  ```
  
+ <p>
+ </details>
+ 
  Plusieurs paramètres de recherche peuvent être renseignés, ils sont facultatifs et peuvent être renseignés dans le désordre:
  /api/series?categories=35&date_sortie=&vo=en&titre=message
  
  <details>
- <summary>Résultat</summary>
+ <summary><b>Résultat</b></summary>
  <p>
   
   ```json
