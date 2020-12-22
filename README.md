@@ -2,6 +2,29 @@
 
 L'api WTF-API vous donne accès à un large choix de films et de serie ainsi que toutes les informations rattachées à ces entités.
 
+# Utilisation - Setup
+ - Avant tout, assurez-vous d'avoir la variable DEBUG à True pour le developpement
+
+```python
+# settings.py
+DEBUG = False
+```
+- Pour mettre à jour votre environement virtuel > ce mettre au niveau de ce fichier dans le terminal
+```bash
+pip install -r requirements.txt
+```
+
+- Si vous avez rajouté des modules à l'application faites systèmatiquement au niveau du fichier *requirements.txt* la commande suivante:
+```bash
+pip freeze > requirements.txt
+```
+
+- Lancer votre serveur, ENJOY!
+```bash
+python manage.py runserver
+```
+
+
 # Api ROUTES
 
 **Section utilisateur**
