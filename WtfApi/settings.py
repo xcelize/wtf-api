@@ -139,6 +139,12 @@ JWT_AUTH = {
         'authenticate.utils.jwt_response_payload_handler'
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
+
 if DEBUG is False:
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

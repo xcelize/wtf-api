@@ -16,6 +16,7 @@ class RetrieveFilmView(RetrieveAPIView):
 
     lookup_field = 'id_video'
     serializer_class = FilmSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         return Films.objects.all()
@@ -23,6 +24,7 @@ class RetrieveFilmView(RetrieveAPIView):
 
 class ListFilmView(ListAPIView):
     serializer_class = FilmSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         return Films.objects.all()
@@ -31,6 +33,7 @@ class ListFilmView(ListAPIView):
 class ListSerieView(ListAPIView):
 
     serializer_class = SerieSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         return Series.objects.all()
@@ -39,6 +42,7 @@ class ListSerieView(ListAPIView):
 class RetrieveSerieView(RetrieveAPIView):
 
     serializer_class = SerieSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     lookup_field = 'pk'
 
     def get_queryset(self):
@@ -48,6 +52,7 @@ class RetrieveSerieView(RetrieveAPIView):
 class CreateRatingFilm(CreateAPIView):
 
     serializer_class = RatingSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):
         return RatingFilms.objects.all()
