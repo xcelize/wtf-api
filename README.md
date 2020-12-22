@@ -130,6 +130,7 @@ python manage.py runserver
 }
 ```
 
+
 **POST** /api/films/rating
 ```
 "film": id_video,
@@ -142,3 +143,116 @@ python manage.py runserver
 "film": id_video,
 "note": [1-5]
 ```
+
+**Section Séries**
+
+- **GET** /api/series
+```json
+ {
+        "id_video": 1,
+        "titre": "Pride",
+        "date_sortie": "2004-01-12",
+        "poster": "/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg",
+        "plot": "Satonaka Halu est un joueur de hockey dans l'équipe des Scorpions dont il est capitaine. Et à cause de son engagement dans ce sport, il ne peut considérer l'amour que comme un jeu, aucune relation durable n'est envisageable sans risquer de blesser la femme qu'il aime.\n\nMurase Aki est quant à elle, une femme d'affaires qui passe la plupart de son temps à attendre que son fiancé revienne. Celui-ci l'a quitté deux ans plus tôt pour aller étudier l'architecture à l'étranger et, lui a promis qu'à son retour, ils se marieront.\n\nHalu et Aki sont opposés dans leur conception de l'amour mais malgré tout, décident de sortir ensemble en attendant que le petit ami d'Aki ne revienne. Mais leur relation est aussi la rencontre entre la rage de vaincre dans un sport violent et l'amour.",
+        "vo": "ja",
+        "nb_saison": 1,
+        "categories": [
+            {
+                "id_categ": 18,
+                "libelle": "Drame"
+            }
+        ],
+        "productions": [],
+        "saisons": [
+            {
+                "id_saison": 2328126,
+                "nb_episode": "11",
+                "nom": "Saison 1",
+                "num_saison": 1
+            }
+        ]
+    },
+    {
+        "id_video": 3,
+        "titre": "The Message",
+        "date_sortie": "2006-05-20",
+        "poster": "/wK9h8FwbmOWlMyW6fT2C6yFPvSu.jpg",
+        "plot": "The Message was a surreal comedy series which spoofs current practices in the television industry. It originally aired in 2006 on BBC Three. It consisted of six episodes, and was not renewed after the first season.",
+        "vo": "en",
+        "nb_saison": 1,
+        "categories": [
+            {
+                "id_categ": 35,
+                "libelle": "Comedy"
+            }
+        ],
+        "productions": [],
+        "saisons": [
+            {
+                "id_saison": 2328129,
+                "nb_episode": "6",
+                "nom": "Season 1",
+                "num_saison": 1
+            }
+        ]
+    }
+```
+
+- **GET** /api/series/<int:id_serie>
+```json
+{
+    "id_video": 3,
+    "titre": "The Message",
+    "date_sortie": "2006-05-20",
+    "poster": "/wK9h8FwbmOWlMyW6fT2C6yFPvSu.jpg",
+    "plot": "The Message was a surreal comedy series which spoofs current practices in the television industry. It originally aired in 2006 on BBC Three. It consisted of six episodes, and was not renewed after the first season.",
+    "vo": "en",
+    "nb_saison": 1,
+    "categories": [
+        {
+            "id_categ": 35,
+            "libelle": "Comedy"
+        }
+    ],
+    "productions": [],
+    "saisons": [
+        {
+            "id_saison": 2328129,
+            "nb_episode": "6",
+            "nom": "Season 1",
+            "num_saison": 1
+        }
+    ]
+}
+```
+
+[ RECHERCHE ]
+- **GET** /api/series?titre=<string>
+ /api/series?titre=message
+ 
+ ```json
+  {
+        "id_video": 3,
+        "titre": "The Message",
+        "date_sortie": "2006-05-20",
+        ...
+  }
+ ```
+ 
+ Plusieurs paramètres de recherche peuvent être renseignés, ils sont facultatifs et peuvent être renseignés dans le désordre:
+ /api/series?categories=35&date_sortie=&vo=en&titre=message
+ 
+  ```json
+  {
+        "id_video": 3,
+        "titre": "The Message",
+        "date_sortie": "2006-05-20",
+        ...
+  }
+ ```
+ 
+ Les paramètres de recherche sont :
+ * titre => Recherche les séries qui contiennent la chaîne renseignée.
+ * categories => Avec les catégories renseignées. Ex: Aventure OU Drame OU Action : &categories=12&categories=18&categories=28
+ * date_sortie => Fourchette de dates. Ex: Séries sorties entre 2000 et 2008: &start_date=2001-01-01&end_date=2008-12-31
+ * vo => Recherche les séries qui ont comme bande originale la chaîne renseignée.
