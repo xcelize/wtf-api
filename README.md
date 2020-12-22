@@ -256,7 +256,9 @@ python manage.py runserver
 </p>
 </details>
 
-[ RECHERCHE ]
+**RECHERCHE**
+Ceci est appliquable aux films et aux séries
+
 - **GET** /api/series?titre=<string>
  /api/series?titre=message
  <details>
@@ -299,3 +301,6 @@ python manage.py runserver
  * categories => Avec les catégories renseignées. Ex: Aventure OU Drame OU Action : &categories=12&categories=18&categories=28
  * date_sortie => Fourchette de dates. Ex: Séries sorties entre 2000 et 2008: &start_date=2001-01-01&end_date=2008-12-31
  * vo => Recherche les séries qui ont comme bande originale la chaîne renseignée.
+ 
+ Paramètre spécifiques aux films :
+ * duree => Recherche les films qui durent moins de temps que la valeur renseignée (en minutes)
