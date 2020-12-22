@@ -29,6 +29,9 @@ class Categories(models.Model):
         managed = False
         db_table = 'categories'
 
+    def __str__(self):
+        return f'{self.libelle}'
+
 
 class Equipe(models.Model):
     id_personne = models.IntegerField(primary_key=True)
@@ -100,7 +103,7 @@ class Films(models.Model):
     poster = models.CharField(max_length=254, blank=True, null=True)
     plot = models.CharField(max_length=254, blank=True, null=True)
     vo = models.CharField(max_length=254, blank=True, null=True)
-    duree = models.CharField(max_length=254, blank=True, null=True)
+    duree = models.IntegerField(blank=True, null=True)
     categories = models.ManyToManyField(to=Categories, through=FilmCategories, symmetrical=False)
     productions = models.ManyToManyField(to='Productions', through=FilmProductions, symmetrical=False)
 
@@ -138,7 +141,7 @@ class Saisons(models.Model):
     id_saison = models.IntegerField(primary_key=True)
     nb_episode = models.CharField(max_length=254, blank=True, null=True)
     nom = models.CharField(max_length=254, blank=True, null=True)
-    num_saison = models.CharField(max_length=254, blank=True, null=True)
+    num_saison = models.IntegerField(blank=True, null=True)
     id_serie = models.ForeignKey('Series', models.DO_NOTHING, db_column='id_serie', blank=True, null=True)
 
     class Meta:
