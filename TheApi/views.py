@@ -1,6 +1,6 @@
-from .models import Films, Series, RatingFilms
+from .models import Films, Series, RatingFilms, RatingSaison
 from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
-from .serializers import FilmSerializer, SerieSerializer, RatingSerializer
+from .serializers import FilmSerializer, SerieSerializer, RatingSerializer, RatingSaisonSerializer
 from rest_framework import permissions
 from .customfilters import FilmFilters
 from rest_framework.viewsets import ModelViewSet
@@ -72,6 +72,25 @@ class UpdateRatingFilm(UpdateAPIView):
 
     def get_queryset(self):
         return RatingFilms.objects.all()
+
+
+class CreateRatingSaison(CreateAPIView):
+
+    serializer_class = RatingSaisonSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        return RatingSaison.objects.all()
+
+
+class UpdateRatingSaison(UpdateAPIView):
+
+    lookup_field = "pk"
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
+    serializer_class = RatingSaisonSerializer
+
+    def get_queryset(self):
+        return RatingSaison.objects.all()
 
 
 # TODO

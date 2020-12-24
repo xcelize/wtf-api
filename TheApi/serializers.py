@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Films, Acteurs, Categories, Productions, Series, Saisons, RatingFilms
+from .models import Films, Acteurs, Categories, Productions, Series, Saisons, RatingFilms, RatingSaison
 
 
 class ActeurSerializer(serializers.ModelSerializer):
@@ -23,7 +23,24 @@ class ProductionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class RatingSaisonSerializer(serializers.ModelSerializer):
+
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = RatingSaison
+        fields = [
+            'id',
+            'user',
+            'saison',
+            'note'
+        ]
+        read_only_fields = ['id']
+
+
 class SaisonSerializer(serializers.ModelSerializer):
+
+    rates = RatingSaisonSerializer(source="ratingsaison_set", many=True)
 
     class Meta:
         model = Saisons
@@ -31,8 +48,10 @@ class SaisonSerializer(serializers.ModelSerializer):
             'id_saison',
             'nb_episode',
             'nom',
-            'num_saison'
+            'num_saison',
+            'rates'
         ]
+
 
 
 class RatingSerializer(serializers.ModelSerializer):
@@ -49,6 +68,7 @@ class RatingSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id']
 
+
 class RatingFilmsSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -56,13 +76,11 @@ class RatingFilmsSerializer(serializers.ModelSerializer):
         fields = ['id', 'note', 'user']
 
 
-
 class FilmSerializer(serializers.ModelSerializer):
 
     categories = CategorieSerializer(many=True)
     productions = ProductionSerializer(many=True)
     rates = RatingFilmsSerializer(source='ratingfilms_set', many=True)
-
 
     class Meta:
         model = Films

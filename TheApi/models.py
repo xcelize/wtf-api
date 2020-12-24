@@ -125,6 +125,17 @@ class RatingFilms(models.Model):
         unique_together = ['film', 'user']
 
 
+class RatingSaison(models.Model):
+
+    saison = models.ForeignKey("Saisons", models.DO_NOTHING, db_column='id_saison')
+    user = models.ForeignKey(get_user_model(), models.DO_NOTHING, db_column='id_user')
+    note = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'rating_series'
+        unique_together = ['saison', 'user']
+
+
 
 class Productions(models.Model):
     id_production = models.IntegerField(primary_key=True)
