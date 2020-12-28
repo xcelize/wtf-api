@@ -38,9 +38,16 @@ class RatingSaisonSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 
+class RatingSaisonGetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = RatingSaison
+        fields = ['id', 'note', 'user']
+
+
 class SaisonSerializer(serializers.ModelSerializer):
 
-    rates = RatingSaisonSerializer(source="ratingsaison_set", many=True)
+    rates = RatingSaisonGetSerializer(source="ratingsaison_set", many=True)
 
     class Meta:
         model = Saisons
@@ -51,7 +58,6 @@ class SaisonSerializer(serializers.ModelSerializer):
             'num_saison',
             'rates'
         ]
-
 
 
 class RatingSerializer(serializers.ModelSerializer):
