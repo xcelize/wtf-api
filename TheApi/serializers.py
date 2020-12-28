@@ -42,7 +42,7 @@ class RatingSaisonGetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RatingSaison
-        fields = ['id', 'note', 'user']
+        fields = ['id', 'note', 'user', 'saison']
 
 
 class SaisonSerializer(serializers.ModelSerializer):
