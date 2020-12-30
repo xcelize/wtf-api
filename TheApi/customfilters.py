@@ -21,3 +21,4 @@ class SerieFilters(filters.FilterSet):
     class Meta:
         model = Series
         fields = ['titre', 'categories', 'date_sortie', 'vo']
+        
