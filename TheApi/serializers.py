@@ -125,6 +125,10 @@ class SerieSerializer(serializers.ModelSerializer):
             'saisons'
         ]
 
+    def to_representation(self, instance):
+        response = super(SerieSerializer, self).to_representation(instance)
+        response['saisons'] = sorted(response['saisons'], key=lambda x: x['num_saison'])
+        return response
 
 
 

@@ -145,17 +145,28 @@ python manage.py runserver
 </p>
 </details>
 
-**POST** /api/films/rating
-```
-"film": id_video,
-"note": [1-5]
+- **POST** /api/films/rating
+```json
+{
+    "film": id_video,
+    "note": [1-5]
+}
 ```
 
-**PUT** /api/films/rating/<int:pk>
+- **PUT** /api/films/rating/<int:pk>
 - /!\ Si un utilisateur autre que celui qui a voté essaye de voter il y a un accès refusé. /!\
+```json
+{
+    "film": id_video,
+    "note": [1-5]
+}
 ```
-"film": id_video,
-"note": [1-5]
+
+- **POST** /api/favoris/film
+```json
+{
+    "film": <id_film>
+}
 ```
 
 **Section Séries**
@@ -255,6 +266,15 @@ python manage.py runserver
 
 </p>
 </details>
+
+**POST** /api/favoris/serie
+```json
+{
+    "serie": <id_serie>
+}
+```
+
+
 
 # RECHERCHE
 

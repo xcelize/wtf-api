@@ -136,7 +136,6 @@ class RatingSaison(models.Model):
         unique_together = ['saison', 'user']
 
 
-
 class Productions(models.Model):
     id_production = models.IntegerField(primary_key=True)
     logo = models.CharField(max_length=254, blank=True, null=True)
@@ -208,7 +207,6 @@ class Series(models.Model):
     nb_saison = models.IntegerField(blank=True, null=True)
     categories = models.ManyToManyField(to=Categories, through=SerieCategories, symmetrical=False)
     productions = models.ManyToManyField(to='Productions', through=SerieProductions, symmetrical=False)
-
 
     class Meta:
         managed = False

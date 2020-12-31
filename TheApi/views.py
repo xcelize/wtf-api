@@ -44,7 +44,6 @@ class ListSerieView(ListAPIView):
     def get_queryset(self):
         return Series.objects.all()
 
-
 class RetrieveSerieView(RetrieveAPIView):
 
     serializer_class = SerieSerializer
