@@ -55,8 +55,8 @@ class SerieFavorisForGet(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
 
-    film_favoris = FilmFavorisForGet(source="filmfavoris_set", many=True)
-    serie_favoris = SerieFavorisSerializer(source='seriefavoris_set', many=True)
+    film_favoris = FilmFavorisForGet(source="filmfavoris_set", many=True, read_only=True)
+    serie_favoris = SerieFavorisSerializer(source='seriefavoris_set', many=True, read_only=True)
 
     class Meta:
         model = User
@@ -76,7 +76,7 @@ class UserSerializer(serializers.ModelSerializer):
             'serie_favoris'
         ]
         extra_kwargs = {
-            'password': {'write_only': True}
+            'password': {'write_only': True},
         }
 
     def create(self, validated_data):
