@@ -32,7 +32,7 @@ class Directeurs(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'diecteurs'
+        db_table = 'directeurs'
 
 
 
@@ -95,6 +95,8 @@ class Films(models.Model):
     duree = models.IntegerField(blank=True, null=True)
     categories = models.ManyToManyField(to=Categories, through=FilmCategories, symmetrical=False)
     productions = models.ManyToManyField(to='Productions', through=FilmProductions, symmetrical=False)
+    acteurs = models.ManyToManyField(to=Acteurs, through=FilmActeurs, symmetrical=False)
+    directeurs = models.ManyToManyField(to=Directeurs, through=FilmDirecteurs, symmetrical=False)
 
     class Meta:
         managed = False
@@ -195,6 +197,8 @@ class Series(models.Model):
     nb_saison = models.IntegerField(blank=True, null=True)
     categories = models.ManyToManyField(to=Categories, through=SerieCategories, symmetrical=False)
     productions = models.ManyToManyField(to='Productions', through=SerieProductions, symmetrical=False)
+    acteurs = models.ManyToManyField(to=Acteurs, through="SerieActeurs", symmetrical=False)
+    directeurs = models.ManyToManyField(to=Directeurs, through="SerieDirecteurs", symmetrical=False)
 
     class Meta:
         managed = False

@@ -1,11 +1,18 @@
 from rest_framework import serializers
-from .models import Films, Acteurs, Categories, Productions, Series, Saisons, RatingFilms, RatingSaison
+from .models import Directeurs, Films, Acteurs, Categories, Productions, Series, Saisons, RatingFilms, RatingSaison
 
 
 class ActeurSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Acteurs
+        fields = '__all__'
+
+
+class DirecteurSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Directeurs
         fields = '__all__'
 
 
@@ -87,6 +94,8 @@ class FilmSerializer(serializers.ModelSerializer):
     categories = CategorieSerializer(many=True)
     productions = ProductionSerializer(many=True)
     rates = RatingFilmsSerializer(source='ratingfilms_set', many=True)
+    directeurs = DirecteurSerializer(many=True)
+    acteurs = ActeurSerializer(many=True)
 
     class Meta:
         model = Films
@@ -100,6 +109,8 @@ class FilmSerializer(serializers.ModelSerializer):
             'duree',
             'categories',
             'productions',
+            'acteurs',
+            'directeurs',
             'rates'
         ]
 
@@ -109,6 +120,8 @@ class SerieSerializer(serializers.ModelSerializer):
     categories = CategorieSerializer(many=True)
     productions = ProductionSerializer(many=True)
     saisons = SaisonSerializer(source='saisons_set', many=True)
+    acteurs = ActeurSerializer(many=True)
+    directeurs = DirecteurSerializer(many=True)
 
     class Meta:
         model = Series
@@ -122,6 +135,8 @@ class SerieSerializer(serializers.ModelSerializer):
             'nb_saison',
             'categories',
             'productions',
+            'acteurs',
+            'directeurs',
             'saisons'
         ]
 
