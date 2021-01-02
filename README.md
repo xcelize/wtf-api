@@ -329,7 +329,9 @@ Les paramètres de recherche sont :
  Paramètre spécifiques aux films :
  * duree => Recherche les films qui durent moins de temps que la valeur renseignée (en minutes)
 
-- **Système de pagination**
+---
+
+**Système de pagination**
 
 Chaque recherche sur les films et les séries va faire apparaître un nouveau format de JSON pour gérer la pagination.
 Lorsque qu'on appelle par exemple toutes les séries :
@@ -358,7 +360,7 @@ Lorsque qu'on appelle par exemple toutes les séries :
 </p>
 </details>
 
-count : nombre de résultats au total
-next : lien vers la page suivante
-previous : lien vers la page précédente
-results : récupérer cette variable pour avoir le résultat de la requête.
+* `count` : nombre de résultats au total
+* `next` : lien vers la page suivante
+* `previous` : lien vers la page précédente
+* `results` : récupérer cette variable pour avoir le résultat de la requête.
