@@ -34,6 +34,7 @@ class CategoriesListView(ListAPIView):
 
 
 class ListFilmView(ListAPIView):
+
     serializer_class = FilmSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filterset_class = FilmFilters

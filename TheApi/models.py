@@ -196,6 +196,7 @@ class Series(models.Model):
     vo = models.CharField(max_length=254, blank=True, null=True)
     nb_saison = models.IntegerField(blank=True, null=True)
     categories = models.ManyToManyField(to=Categories, through=SerieCategories, symmetrical=False)
+    plateformes = models.ManyToManyField(to=Plateformes, through=SeriePlateformes, symmetrical=False)
     productions = models.ManyToManyField(to='Productions', through=SerieProductions, symmetrical=False)
     acteurs = models.ManyToManyField(to=Acteurs, through="SerieActeurs", symmetrical=False)
     directeurs = models.ManyToManyField(to=Directeurs, through="SerieDirecteurs", symmetrical=False)

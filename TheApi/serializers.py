@@ -1,5 +1,12 @@
 from rest_framework import serializers
-from .models import Directeurs, Films, Acteurs, Categories, Productions, Series, Saisons, RatingFilms, RatingSaison
+from .models import Plateformes, Directeurs, Films, Acteurs, Categories, Productions, Series, Saisons, RatingFilms, RatingSaison
+
+
+class PlateformeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Plateformes
+        fields = '__all__'
 
 
 class ActeurSerializer(serializers.ModelSerializer):
@@ -97,6 +104,7 @@ class FilmSerializer(serializers.ModelSerializer):
     directeurs = DirecteurSerializer(many=True)
     acteurs = ActeurSerializer(many=True)
 
+
     class Meta:
         model = Films
         fields = [
@@ -122,6 +130,7 @@ class SerieSerializer(serializers.ModelSerializer):
     saisons = SaisonSerializer(source='saisons_set', many=True)
     acteurs = ActeurSerializer(many=True)
     directeurs = DirecteurSerializer(many=True)
+    plateformes = PlateformeSerializer(many=True)
 
     class Meta:
         model = Series
@@ -134,6 +143,7 @@ class SerieSerializer(serializers.ModelSerializer):
             'vo',
             'nb_saison',
             'categories',
+            'plateformes',
             'productions',
             'acteurs',
             'directeurs',
