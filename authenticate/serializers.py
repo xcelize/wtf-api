@@ -1,8 +1,62 @@
-from .models import User
+from .models import User, FilmFavoris, SerieFavoris
 from rest_framework import serializers
+from TheApi.serializers import FilmSerializer, SerieSerializer
+
+
+class FilmFavorisSerializer(serializers.ModelSerializer):
+
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = FilmFavoris
+        fields = ['id', 'film', 'user', 'date_ajout']
+        extra_kwargs = {
+            'user': {'write_only': True}
+        }
+
+
+class SerieFavorisSerializer(serializers.ModelSerializer):
+
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = SerieFavoris
+        fields = ['id', 'serie', 'user', 'date_ajout']
+        extra_kwargs = {
+            'user': {'write_only': True}
+        }
+
+
+class FilmFavorisForGet(serializers.ModelSerializer):
+
+    film = FilmSerializer()
+
+    class Meta:
+        model = FilmFavoris
+        fields = [
+            'id',
+            'film',
+            'date_ajout'
+        ]
+
+
+class SerieFavorisForGet(serializers.ModelSerializer):
+
+    serie = SerieSerializer()
+
+    class Meta:
+        model = SerieFavoris
+        fields = [
+            'id',
+            'serie',
+            'date_ajout'
+        ]
 
 
 class UserSerializer(serializers.ModelSerializer):
+
+    film_favoris = FilmFavorisForGet(source="filmfavoris_set", many=True)
+    serie_favoris = SerieFavorisSerializer(source='seriefavoris_set', many=True)
 
     class Meta:
         model = User
@@ -10,14 +64,16 @@ class UserSerializer(serializers.ModelSerializer):
             'id',
             'email',
             'password',
-             'nom',
-             'prenom',
-             'date_inscription',
-             'date_naissance',
-             'email',
-             'genre',
-             'telephone',
-             'pays',
+            'nom',
+            'prenom',
+            'date_inscription',
+            'date_naissance',
+            'email',
+            'genre',
+            'telephone',
+            'pays',
+            'film_favoris',
+            'serie_favoris'
         ]
         extra_kwargs = {
             'password': {'write_only': True}
