@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
 from .serializers import UserSerializer, UpdataUserSerializer, FilmFavorisSerializer, SerieFavorisSerializer
 from .models import User, SerieFavoris, FilmFavoris
 
@@ -44,7 +44,7 @@ class CreateFavorisFilmView(CreateAPIView):
         return FilmFavoris.objects.all()
 
 
-class UpdateFavorisFilm(UpdateAPIView):
+class UpdateFavorisFilm(RetrieveUpdateDestroyAPIView):
 
     lookup_field = "pk"
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
@@ -64,7 +64,7 @@ class CreateFavorisSerieView(CreateAPIView):
         return SerieFavoris.objects.all()
 
 
-class UpdateFavorisSerie(UpdateAPIView):
+class UpdateFavorisSerie(RetrieveUpdateDestroyAPIView):
 
     lookup_field = "pk"
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
