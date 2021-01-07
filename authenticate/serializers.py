@@ -1,6 +1,7 @@
 from .models import User, FilmFavoris, SerieFavoris
 from rest_framework import serializers
 from TheApi.serializers import FilmSerializer, SerieSerializer
+from TheApi.models import Films
 
 
 class FilmFavorisSerializer(serializers.ModelSerializer):
@@ -14,6 +15,11 @@ class FilmFavorisSerializer(serializers.ModelSerializer):
             'user': {'write_only': True}
         }
 
+    def to_representation(self, instance):
+        self.fields['film'] = FilmSerializer()
+        return super(FilmFavorisSerializer, self).to_representation(instance)
+
+
 
 class SerieFavorisSerializer(serializers.ModelSerializer):
 
@@ -25,6 +31,10 @@ class SerieFavorisSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'user': {'write_only': True}
         }
+
+    def to_representation(self, instance):
+        self.fields['serie'] = SerieSerializer()
+        return super(SerieFavorisSerializer, self).to_representation(instance)
 
 
 class FilmFavorisForGet(serializers.ModelSerializer):
