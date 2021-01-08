@@ -145,17 +145,28 @@ python manage.py runserver
 </p>
 </details>
 
-**POST** /api/films/rating
-```
-"film": id_video,
-"note": [1-5]
+- **POST** /api/films/rating
+```json
+{
+    "film": id_video,
+    "note": [1-5]
+}
 ```
 
-**PUT** /api/films/rating/<int:pk>
+- **PUT** /api/films/rating/<int:pk>
 - /!\ Si un utilisateur autre que celui qui a voté essaye de voter il y a un accès refusé. /!\
+```json
+{
+    "film": id_video,
+    "note": [1-5]
+}
 ```
-"film": id_video,
-"note": [1-5]
+
+- **POST** /api/favoris/film
+```json
+{
+    "film": <id_film>
+}
 ```
 
 **Section Séries**
@@ -256,6 +267,15 @@ python manage.py runserver
 </p>
 </details>
 
+**POST** /api/favoris/serie
+```json
+{
+    "serie": <id_serie>
+}
+```
+
+
+
 # RECHERCHE
 
 Ceci est appliquable aux films et aux séries
@@ -308,3 +328,39 @@ Les paramètres de recherche sont :
  
  Paramètre spécifiques aux films :
  * duree => Recherche les films qui durent moins de temps que la valeur renseignée (en minutes)
+
+---
+
+**Système de pagination**
+
+Chaque recherche sur les films et les séries va faire apparaître un nouveau format de JSON pour gérer la pagination.
+Lorsque qu'on appelle par exemple toutes les séries :
+
+ > `/api/series`
+ 
+ <details>
+ <summary><b>Résultat</b></summary>
+ <p>
+ 
+ ```json
+{
+    "count": 11528,
+    "next": "https://wtf-api-v1.herokuapp.com/api/series?page=2",
+    "previous": null,
+    "results": [
+        {
+            "id_video": 1,
+            "titre": "Pride",
+            ...
+        }
+    ]
+}
+ ```
+ 
+</p>
+</details>
+
+* `count` : nombre de résultats au total
+* `next` : lien vers la page suivante
+* `previous` : lien vers la page précédente
+* `results` : récupérer cette variable pour avoir le résultat de la requête.

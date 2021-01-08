@@ -1,6 +1,6 @@
-from .models import Films, Series, RatingFilms, RatingSaison
+from .models import Films, Series, RatingFilms, RatingSaison, Categories
 from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
-from .serializers import FilmSerializer, SerieSerializer, RatingSerializer, RatingSaisonSerializer
+from .serializers import CategorieSerializer, FilmSerializer, SerieSerializer, RatingSerializer, RatingSaisonSerializer
 from rest_framework import permissions
 from .customfilters import FilmFilters, SerieFilters
 from drf_multiple_model.views import ObjectMultipleModelAPIView
@@ -25,14 +25,22 @@ class RetrieveFilmView(RetrieveAPIView):
         return Films.objects.all()
 
 
+class CategoriesListView(ListAPIView):
+
+    serializer_class = CategorieSerializer
+
+    def get_queryset(self):
+        return Categories.objects.all()
+
+
 class ListFilmView(ListAPIView):
+
     serializer_class = FilmSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filterset_class = FilmFilters
 
     def get_queryset(self):
         return Films.objects.all()
-
 
 
 class ListSerieView(ListAPIView):
