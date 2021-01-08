@@ -1,4 +1,5 @@
 from rest_framework import permissions
+
 from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
 from .serializers import UserSerializer, UpdataUserSerializer, FilmFavorisSerializer, SerieFavorisSerializer
 from .models import User, SerieFavoris, FilmFavoris
@@ -11,14 +12,15 @@ class isOwnerOrReadOnly(permissions.BasePermission):
         print(request.user)
         return obj.user == request.user
 
-
 class CreateUser(CreateAPIView):
 
     serializer_class = UserSerializer
 
 
+
 class UpdateUser(UpdateAPIView):
 
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = UpdataUserSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     lookup_field = "pk"
