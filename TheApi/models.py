@@ -13,12 +13,27 @@ class Acteurs(models.Model):
     id_personne = models.IntegerField(primary_key=True)
     nom = models.CharField(max_length=254, blank=True, null=True)
     photo_profil = models.CharField(max_length=254, blank=True, null=True)
-    popularite = models.TextField(blank=True, null=True)  # This field type is a guess.
+    popularite = models.FloatField(blank=True, null=True)  # This field type is a guess.
     personnage = models.CharField(max_length=254, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'acteurs'
+
+
+class Directeurs(models.Model):
+
+    id_personne = models.IntegerField(primary_key=True)
+    nom = models.CharField(max_length=254, blank=True, null=True)
+    photo_profil = models.CharField(max_length=254, blank=True, null=True)
+    popularite = models.FloatField(max_length=254, blank=True, null=True)
+    departement = models.CharField(max_length=254, blank=True, null=True)
+    job = models.CharField(max_length=254, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'directeurs'
+
 
 
 class Categories(models.Model):
@@ -33,32 +48,6 @@ class Categories(models.Model):
         return f'{self.libelle}'
 
 
-class Equipe(models.Model):
-    id_personne = models.IntegerField(primary_key=True)
-    nom = models.CharField(max_length=254, blank=True, null=True)
-    photo_profil = models.CharField(max_length=254, blank=True, null=True)
-    popularite = models.TextField(blank=True, null=True)  # This field type is a guess.
-    departement = models.CharField(max_length=254, blank=True, null=True)
-    job = models.CharField(max_length=254, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'equipe'
-
-
-class Equipes(models.Model):
-    id_personne = models.IntegerField(primary_key=True)
-    nom = models.CharField(max_length=254, blank=True, null=True)
-    photo_profil = models.CharField(max_length=254, blank=True, null=True)
-    popularite = models.TextField(blank=True, null=True)  # This field type is a guess.
-    departement = models.CharField(max_length=254, blank=True, null=True)
-    job = models.CharField(max_length=254, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'equipes'
-
-
 class FilmActeurs(models.Model):
     film = models.ForeignKey('Films', models.DO_NOTHING, blank=True, null=True)
     acteur = models.ForeignKey(Acteurs, models.DO_NOTHING, blank=True, null=True)
@@ -68,6 +57,15 @@ class FilmActeurs(models.Model):
         db_table = 'film_acteurs'
 
 
+class FilmDirecteurs(models.Model):
+    film = models.ForeignKey('Films', models.DO_NOTHING, blank=True, null=True)
+    directeur = models.ForeignKey(Directeurs, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'film_directeurs'
+
+
 class FilmCategories(models.Model):
     film = models.ForeignKey('Films', models.DO_NOTHING, blank=True, null=True)
     categorie = models.ForeignKey(Categories, models.DO_NOTHING, blank=True, null=True)
@@ -75,15 +73,6 @@ class FilmCategories(models.Model):
     class Meta:
         managed = False
         db_table = 'film_categories'
-
-
-class FilmEquipes(models.Model):
-    film = models.ForeignKey('Films', models.DO_NOTHING, blank=True, null=True)
-    equipe = models.ForeignKey(Equipe, models.DO_NOTHING, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'film_equipes'
 
 
 class FilmProductions(models.Model):
@@ -106,6 +95,8 @@ class Films(models.Model):
     duree = models.IntegerField(blank=True, null=True)
     categories = models.ManyToManyField(to=Categories, through=FilmCategories, symmetrical=False)
     productions = models.ManyToManyField(to='Productions', through=FilmProductions, symmetrical=False)
+    acteurs = models.ManyToManyField(to=Acteurs, through=FilmActeurs, symmetrical=False)
+    directeurs = models.ManyToManyField(to=Directeurs, through=FilmDirecteurs, symmetrical=False)
 
     class Meta:
         managed = False
@@ -120,10 +111,19 @@ class RatingFilms(models.Model):
     note = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'rating_films'
         unique_together = ['film', 'user']
 
+
+class RatingSaison(models.Model):
+
+    saison = models.ForeignKey("Saisons", models.DO_NOTHING, db_column='id_saison')
+    user = models.ForeignKey(get_user_model(), models.DO_NOTHING, db_column='id_user')
+    note = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'rating_series'
+        unique_together = ['saison', 'user']
 
 
 class Productions(models.Model):
@@ -196,12 +196,28 @@ class Series(models.Model):
     vo = models.CharField(max_length=254, blank=True, null=True)
     nb_saison = models.IntegerField(blank=True, null=True)
     categories = models.ManyToManyField(to=Categories, through=SerieCategories, symmetrical=False)
+    plateformes = models.ManyToManyField(to=Plateformes, through=SeriePlateformes, symmetrical=False)
     productions = models.ManyToManyField(to='Productions', through=SerieProductions, symmetrical=False)
-
+    acteurs = models.ManyToManyField(to=Acteurs, through="SerieActeurs", symmetrical=False)
+    directeurs = models.ManyToManyField(to=Directeurs, through="SerieDirecteurs", symmetrical=False)
 
     class Meta:
         managed = False
         db_table = 'series'
 
 
+class SerieActeurs(models.Model):
+    serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
+    acteur = models.ForeignKey(Acteurs, models.DO_NOTHING, blank=True, null=True)
 
+    class Meta:
+        managed = False
+        db_table = 'serie_acteurs'
+
+class SerieDirecteurs(models.Model):
+    serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
+    directeur = models.ForeignKey(Directeurs, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'serie_directeurs'

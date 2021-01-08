@@ -2,6 +2,29 @@
 
 L'api WTF-API vous donne accès à un large choix de films et de serie ainsi que toutes les informations rattachées à ces entités.
 
+# Utilisation - Setup
+ - Avant tout, assurez-vous d'avoir la variable DEBUG à True pour le developpement
+
+```python
+# settings.py
+DEBUG = False
+```
+- Pour mettre à jour votre environement virtuel > ce mettre au niveau de ce fichier dans le terminal
+```bash
+pip install -r requirements.txt
+```
+
+- Si vous avez rajouté des modules à l'application faites systèmatiquement au niveau du fichier *requirements.txt* la commande suivante:
+```bash
+pip freeze > requirements.txt
+```
+
+- Lancer votre serveur, ENJOY!
+```bash
+python manage.py runserver
+```
+
+
 # Api ROUTES
 
 **Section utilisateur**
@@ -54,6 +77,10 @@ L'api WTF-API vous donne accès à un large choix de films et de serie ainsi que
 **Section Films**
 
 - **GET** /api/films
+<details>
+ <summary><b>Résultat</b></summary>
+ <p>
+
 ```json
 {
     "id_video": 12,
@@ -87,8 +114,16 @@ L'api WTF-API vous donne accès à un large choix de films et de serie ainsi que
   }
 ```
 
+</p>
+</details>
+
 
 - **GET** /api/films/<int:id_film>
+
+<details>
+ <summary><b>Résultat</b></summary>
+ <p>
+  
 ```json
 {
     "id_video": 12,
@@ -107,15 +142,225 @@ L'api WTF-API vous donne accès à un large choix de films et de serie ainsi que
 }
 ```
 
-**POST** /api/films/rating
-```
-"film": id_video,
-"note": [1-5]
+</p>
+</details>
+
+- **POST** /api/films/rating
+```json
+{
+    "film": id_video,
+    "note": [1-5]
+}
 ```
 
-**PUT** /api/films/rating/<int:pk>
-- /!\ Si un utilisateur autre que celui qui a voter essaye de voter il y a un accès refusé. /!\
+- **PUT** /api/films/rating/<int:pk>
+- /!\ Si un utilisateur autre que celui qui a voté essaye de voter il y a un accès refusé. /!\
+```json
+{
+    "film": id_video,
+    "note": [1-5]
+}
 ```
-"film": id_video,
-"note": [1-5]
+
+- **POST** /api/favoris/film
+```json
+{
+    "film": <id_film>
+}
 ```
+
+**Section Séries**
+
+- **GET** /api/series
+
+<details>
+ <summary><b>Résultat</b></summary>
+ <p>
+  
+```json
+ {
+        "id_video": 1,
+        "titre": "Pride",
+        "date_sortie": "2004-01-12",
+        "poster": "/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg",
+        "plot": "Satonaka Halu est un joueur de hockey dans l'équipe des Scorpions dont il est capitaine. Et à cause de son engagement dans ce sport, il ne peut considérer l'amour que comme un jeu, aucune relation durable n'est envisageable sans risquer de blesser la femme qu'il aime.\n\nMurase Aki est quant à elle, une femme d'affaires qui passe la plupart de son temps à attendre que son fiancé revienne. Celui-ci l'a quitté deux ans plus tôt pour aller étudier l'architecture à l'étranger et, lui a promis qu'à son retour, ils se marieront.\n\nHalu et Aki sont opposés dans leur conception de l'amour mais malgré tout, décident de sortir ensemble en attendant que le petit ami d'Aki ne revienne. Mais leur relation est aussi la rencontre entre la rage de vaincre dans un sport violent et l'amour.",
+        "vo": "ja",
+        "nb_saison": 1,
+        "categories": [
+            {
+                "id_categ": 18,
+                "libelle": "Drame"
+            }
+        ],
+        "productions": [],
+        "saisons": [
+            {
+                "id_saison": 2328126,
+                "nb_episode": "11",
+                "nom": "Saison 1",
+                "num_saison": 1
+            }
+        ]
+    },
+    {
+        "id_video": 3,
+        "titre": "The Message",
+        "date_sortie": "2006-05-20",
+        "poster": "/wK9h8FwbmOWlMyW6fT2C6yFPvSu.jpg",
+        "plot": "The Message was a surreal comedy series which spoofs current practices in the television industry. It originally aired in 2006 on BBC Three. It consisted of six episodes, and was not renewed after the first season.",
+        "vo": "en",
+        "nb_saison": 1,
+        "categories": [
+            {
+                "id_categ": 35,
+                "libelle": "Comedy"
+            }
+        ],
+        "productions": [],
+        "saisons": [
+            {
+                "id_saison": 2328129,
+                "nb_episode": "6",
+                "nom": "Season 1",
+                "num_saison": 1
+            }
+        ]
+    }
+```
+
+</p>
+</details>
+
+
+- **GET** /api/series/<int:id_serie>
+<details>
+ <summary><b>Résultat</b></summary>
+ <p>
+  
+```json
+{
+    "id_video": 3,
+    "titre": "The Message",
+    "date_sortie": "2006-05-20",
+    "poster": "/wK9h8FwbmOWlMyW6fT2C6yFPvSu.jpg",
+    "plot": "The Message was a surreal comedy series which spoofs current practices in the television industry. It originally aired in 2006 on BBC Three. It consisted of six episodes, and was not renewed after the first season.",
+    "vo": "en",
+    "nb_saison": 1,
+    "categories": [
+        {
+            "id_categ": 35,
+            "libelle": "Comedy"
+        }
+    ],
+    "productions": [],
+    "saisons": [
+        {
+            "id_saison": 2328129,
+            "nb_episode": "6",
+            "nom": "Season 1",
+            "num_saison": 1
+        }
+    ]
+}
+```
+
+</p>
+</details>
+
+**POST** /api/favoris/serie
+```json
+{
+    "serie": <id_serie>
+}
+```
+
+
+
+# RECHERCHE
+
+Ceci est appliquable aux films et aux séries
+
+- **GET** /api/series?titre=string
+ 
+> /api/series?titre=message
+
+<details>
+<summary><b>Résultat</b></summary>
+<p>
+ 
+ ```json
+  {
+        "id_video": 3,
+        "titre": "The Message",
+        "date_sortie": "2006-05-20",
+        ...
+  }
+ ```
+
+ <p>
+ </details>
+ 
+ Plusieurs paramètres de recherche peuvent être renseignés, ils sont facultatifs et peuvent être renseignés dans le désordre:
+ 
+ > `/api/series?categories=35&date_sortie=&vo=en&titre=message`
+ 
+ <details>
+ <summary><b>Résultat</b></summary>
+ <p>
+  
+  ```json
+  {
+        "id_video": 3,
+        "titre": "The Message",
+        "date_sortie": "2006-05-20",
+        ...
+  }
+ ```
+ 
+ </p>
+ </details>
+ 
+Les paramètres de recherche sont :
+* titre => Recherche les séries qui contiennent la chaîne renseignée.
+* categories => Avec les catégories renseignées. Ex: Aventure OU Drame OU Action : `&categories=12&categories=18&categories=28`
+* date_sortie => Fourchette de dates. Ex: Séries sorties entre 2000 et 2008: `&start_date=2001-01-01&end_date=2008-12-31`
+* vo => Recherche les séries qui ont comme bande originale la chaîne renseignée.
+ 
+ Paramètre spécifiques aux films :
+ * duree => Recherche les films qui durent moins de temps que la valeur renseignée (en minutes)
+
+---
+
+**Système de pagination**
+
+Chaque recherche sur les films et les séries va faire apparaître un nouveau format de JSON pour gérer la pagination.
+Lorsque qu'on appelle par exemple toutes les séries :
+
+ > `/api/series`
+ 
+ <details>
+ <summary><b>Résultat</b></summary>
+ <p>
+ 
+ ```json
+{
+    "count": 11528,
+    "next": "https://wtf-api-v1.herokuapp.com/api/series?page=2",
+    "previous": null,
+    "results": [
+        {
+            "id_video": 1,
+            "titre": "Pride",
+            ...
+        }
+    ]
+}
+ ```
+ 
+</p>
+</details>
+
+* `count` : nombre de résultats au total
+* `next` : lien vers la page suivante
+* `previous` : lien vers la page précédente
+* `results` : récupérer cette variable pour avoir le résultat de la requête.

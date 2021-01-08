@@ -30,3 +30,29 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         return f'{self.nom} - {self.prenom}'
 
+
+class FilmFavoris(models.Model):
+
+    film = models.ForeignKey("TheApi.Films", models.DO_NOTHING, db_column='id_film')
+    user = models.ForeignKey(User, models.DO_NOTHING, db_column='id_user')
+    date_ajout = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Film: {self.film.titre} - User: {self.user.email}'
+
+    class Meta:
+        verbose_name_plural = "Films Favoris"
+        unique_together = ['user', 'film']
+
+
+class SerieFavoris(models.Model):
+
+    serie = models.ForeignKey("TheApi.Series", models.DO_NOTHING, db_column='id_serie')
+    user = models.ForeignKey(User, models.DO_NOTHING, db_column='id_user')
+    date_ajout = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Serie: {self.serie.titre} - User: {self.user.email}'
+
+    class Meta:
+        unique_together = ['user', 'serie']

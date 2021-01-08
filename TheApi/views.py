@@ -1,9 +1,8 @@
-from .models import Films, Series, RatingFilms
+from .models import Films, Series, RatingFilms, RatingSaison, Categories
 from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
-from .serializers import FilmSerializer, SerieSerializer, RatingSerializer
+from .serializers import CategorieSerializer, FilmSerializer, SerieSerializer, RatingSerializer, RatingSaisonSerializer
 from rest_framework import permissions
-from .customfilters import FilmFilters
-from rest_framework.viewsets import ModelViewSet
+from .customfilters import FilmFilters, SerieFilters
 from drf_multiple_model.views import ObjectMultipleModelAPIView
 from django_filters import rest_framework as filters
 
@@ -26,7 +25,16 @@ class RetrieveFilmView(RetrieveAPIView):
         return Films.objects.all()
 
 
+class CategoriesListView(ListAPIView):
+
+    serializer_class = CategorieSerializer
+
+    def get_queryset(self):
+        return Categories.objects.all()
+
+
 class ListFilmView(ListAPIView):
+
     serializer_class = FilmSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filterset_class = FilmFilters
@@ -35,11 +43,11 @@ class ListFilmView(ListAPIView):
         return Films.objects.all()
 
 
-
 class ListSerieView(ListAPIView):
 
     serializer_class = SerieSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filterset_class = SerieFilters
 
     def get_queryset(self):
         return Series.objects.all()
@@ -72,6 +80,25 @@ class UpdateRatingFilm(UpdateAPIView):
 
     def get_queryset(self):
         return RatingFilms.objects.all()
+
+
+class CreateRatingSaison(CreateAPIView):
+
+    serializer_class = RatingSaisonSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        return RatingSaison.objects.all()
+
+
+class UpdateRatingSaison(UpdateAPIView):
+
+    lookup_field = "pk"
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
+    serializer_class = RatingSaisonSerializer
+
+    def get_queryset(self):
+        return RatingSaison.objects.all()
 
 
 # TODO
