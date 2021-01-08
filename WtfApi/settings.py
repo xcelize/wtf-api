@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'c7b#iil47q6bu!cb=8gbtb(midwevo7g0pw1)fbr4saa%!q((e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -158,12 +158,13 @@ REST_FRAMEWORK = {
 
 if DEBUG is False:
 
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+    #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_URL = '/static/'
     # Extra places for collectstatic to find static files.
-    STATICFILES_DIRS = (
+    '''STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
-    )
+    )'''
     '''db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)'''
 
