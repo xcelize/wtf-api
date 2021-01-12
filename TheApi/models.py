@@ -9,6 +9,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 
+# Ce fichier contient tous les modèles objets liés aux tables de la base.
+
 class Acteurs(models.Model):
     id_personne = models.IntegerField(primary_key=True)
     nom = models.CharField(max_length=254, blank=True, null=True)
@@ -22,7 +24,6 @@ class Acteurs(models.Model):
 
 
 class Directeurs(models.Model):
-
     id_personne = models.IntegerField(primary_key=True)
     nom = models.CharField(max_length=254, blank=True, null=True)
     photo_profil = models.CharField(max_length=254, blank=True, null=True)
@@ -33,7 +34,6 @@ class Directeurs(models.Model):
     class Meta:
         managed = False
         db_table = 'directeurs'
-
 
 
 class Categories(models.Model):
@@ -48,7 +48,7 @@ class Categories(models.Model):
         return f'{self.libelle}'
 
 
-class FilmActeurs(models.Model):
+class FilmActeurs(models.Model):  # Liaison entre les tables 'Film' et 'Acteur'
     film = models.ForeignKey('Films', models.DO_NOTHING, blank=True, null=True)
     acteur = models.ForeignKey(Acteurs, models.DO_NOTHING, blank=True, null=True)
 
@@ -57,7 +57,7 @@ class FilmActeurs(models.Model):
         db_table = 'film_acteurs'
 
 
-class FilmDirecteurs(models.Model):
+class FilmDirecteurs(models.Model):  # Liaison entre les tables 'Films' et 'Directeurs'
     film = models.ForeignKey('Films', models.DO_NOTHING, blank=True, null=True)
     directeur = models.ForeignKey(Directeurs, models.DO_NOTHING, blank=True, null=True)
 
@@ -66,7 +66,7 @@ class FilmDirecteurs(models.Model):
         db_table = 'film_directeurs'
 
 
-class FilmCategories(models.Model):
+class FilmCategories(models.Model):  # Liaison entre les tables 'Films' et 'Catégories'
     film = models.ForeignKey('Films', models.DO_NOTHING, blank=True, null=True)
     categorie = models.ForeignKey(Categories, models.DO_NOTHING, blank=True, null=True)
 
@@ -75,7 +75,7 @@ class FilmCategories(models.Model):
         db_table = 'film_categories'
 
 
-class FilmProductions(models.Model):
+class FilmProductions(models.Model):  # Liaison entre les tables 'Films' et 'Productions'
     film = models.ForeignKey('Films', models.DO_NOTHING, blank=True, null=True)
     production = models.ForeignKey('Productions', models.DO_NOTHING, blank=True, null=True)
 
@@ -85,7 +85,6 @@ class FilmProductions(models.Model):
 
 
 class Films(models.Model):
-
     id_video = models.IntegerField(primary_key=True)
     titre = models.CharField(max_length=254, blank=True, null=True)
     date_sortie = models.CharField(max_length=254, blank=True, null=True)
@@ -103,8 +102,7 @@ class Films(models.Model):
         db_table = 'films'
 
 
-class RatingFilms(models.Model):
-
+class RatingFilms(models.Model):  # Notes sur les films
     id = models.AutoField(primary_key=True, auto_created=True)
     film = models.ForeignKey(Films, models.DO_NOTHING, db_column='id_film')
     user = models.ForeignKey(get_user_model(), models.DO_NOTHING, db_column='id_user')
@@ -115,8 +113,7 @@ class RatingFilms(models.Model):
         unique_together = ['film', 'user']
 
 
-class RatingSaison(models.Model):
-
+class RatingSaison(models.Model):  # Notes sur les saisons (séries)
     saison = models.ForeignKey("Saisons", models.DO_NOTHING, db_column='id_saison')
     user = models.ForeignKey(get_user_model(), models.DO_NOTHING, db_column='id_user')
     note = models.IntegerField(blank=True, null=True)
@@ -149,7 +146,7 @@ class Saisons(models.Model):
         db_table = 'saisons'
 
 
-class SerieCategories(models.Model):
+class SerieCategories(models.Model):  # Liaison entre les tables 'Séries' et 'Catégories'
     serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
     categorie = models.ForeignKey(Categories, models.DO_NOTHING, blank=True, null=True)
 
@@ -168,7 +165,7 @@ class Plateformes(models.Model):
         db_table = 'plateformes'
 
 
-class SeriePlateformes(models.Model):
+class SeriePlateformes(models.Model):  # Liaison entre les tables 'Séries' et 'Plateformes'
     serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
     plateforme = models.ForeignKey(Plateformes, models.DO_NOTHING, blank=True, null=True)
 
@@ -177,7 +174,7 @@ class SeriePlateformes(models.Model):
         db_table = 'serie_plateformes'
 
 
-class SerieProductions(models.Model):
+class SerieProductions(models.Model):  # Liaison entre les tables 'Séries' et 'Productions'
     serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
     production = models.ForeignKey(Productions, models.DO_NOTHING, blank=True, null=True)
 
@@ -187,7 +184,6 @@ class SerieProductions(models.Model):
 
 
 class Series(models.Model):
-
     id_video = models.IntegerField(primary_key=True)
     titre = models.CharField(max_length=254, blank=True, null=True)
     date_sortie = models.CharField(max_length=254, blank=True, null=True)
@@ -206,7 +202,7 @@ class Series(models.Model):
         db_table = 'series'
 
 
-class SerieActeurs(models.Model):
+class SerieActeurs(models.Model):  # Liaison entre les tables 'Séries' et 'Acteurs'
     serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
     acteur = models.ForeignKey(Acteurs, models.DO_NOTHING, blank=True, null=True)
 
@@ -214,7 +210,8 @@ class SerieActeurs(models.Model):
         managed = False
         db_table = 'serie_acteurs'
 
-class SerieDirecteurs(models.Model):
+
+class SerieDirecteurs(models.Model):  # Liaison entre les tables 'Séries' et 'Directeurs'
     serie = models.ForeignKey('Series', models.DO_NOTHING, blank=True, null=True)
     directeur = models.ForeignKey(Directeurs, models.DO_NOTHING, blank=True, null=True)
 
