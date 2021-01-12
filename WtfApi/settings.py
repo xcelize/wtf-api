@@ -172,7 +172,8 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 
 if os.environ.get('ENV') == "PRODUCTION":
     DEBUG = False
-    BROKER_URL = os.environ.get("CLOUDAMQP_URL", "django://")
+    BROKER_URL = os.environ["CLOUDAMQP_URL"]
+    print(BROKER_URL)
     BROKER_POOL_LIMIT = 1
     BROKER_CONNECTION_MAX_RETRIES = None
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
