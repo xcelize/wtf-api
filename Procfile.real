@@ -1,3 +1,2 @@
 web: gunicorn WtfApi.wsgi
-worker: celery -A WtfApi worker -l info
-beat: celery -A WtfApi celery beat -l info
+worker: celery -A WtfApi worker -B -l info
