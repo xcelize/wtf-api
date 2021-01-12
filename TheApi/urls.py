@@ -12,7 +12,7 @@ urlpatterns = [
     path('series/saison/rating', views.CreateRatingSaison.as_view(), name="create_rating_saison"),
     path('series/saison/rating/<int:pk>', views.UpdateRatingSaison.as_view(), name="update_rating_saison"),
     path('videos/all', views.VideoAPIView.as_view(), name="list_videos"),
-    path('suggestion-rating', views.GetUserSuggestionRating.as_view(), name="suggestion_rating")
-    # path('suggestion-favoris', views.GetUserSuggestionFavoris.as_view(), name="suggestion_favoris")
-    # path('tendance', views.GetTendance.as_view(), name="tendance")
+    path('suggestion-rating', views.GetUserSuggestionRating.as_view(), name="suggestion_rating"),
+    path('suggestion-favoris', views.GetUserSuggestionFavoris.as_view(), name="suggestion_favoris"),
+    path('tendance', views.GetTendanceAPI.as_view(), name="tendance")
 ]

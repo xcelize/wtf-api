@@ -116,7 +116,7 @@ class UpdateRatingSaison(UpdateAPIView):
 
 class GetUserSuggestionRating(APIView):
 
-    file_path = os.path.join(os.path.join(settings.BASE_DIR, 'store'), 'SuggestionRating.json')
+    file_path = settings.FILE_PATH_SUGGESTION_RATING
     permission_classes = [permissions.IsAuthenticated]
 
     # ouvrir le fichier
@@ -129,6 +129,29 @@ class GetUserSuggestionRating(APIView):
             json_data = json.load(f)
             l = [element for element in filter(lambda x: (x['user']['id'] is user.id), json_data)]
         return Response(l[0])
+
+
+class GetUserSuggestionFavoris(APIView):
+
+    file_path = settings.FILE_PATH_RECOMMANDATION_FAVORIS
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, format=None):
+        user = request.user
+        with open(self.file_path, 'r') as f:
+            json_data = json.load(f)
+            l = [element for element in filter(lambda x: (x['user']['id'] is user.id), json_data)]
+        return Response(l[0])
+
+
+class GetTendanceAPI(APIView):
+
+    file_path = settings.FILE_PATH_TENDANCE
+
+    def get(self, request, format=None):
+        with open(self.file_path, 'r') as f:
+            json_data = json.load(f)
+        return Response(json_data)
 
 
 

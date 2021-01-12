@@ -45,8 +45,7 @@ class Tendance:
             filmSerializer = FilmSerializer(i)
             json_data = JSONRenderer().render(filmSerializer.data)
             liste.append(json.loads(json_data.decode("utf-8")))
-        path_file = os.path.join(settings.BASE_DIR, 'tendance.json')
-        with open(path_file, 'w') as f:
+        with open(settings.FILE_PATH_TENDANCE, 'w') as f:
             json.dump(liste, f, indent=4)
 
     def nb_ratings_df(self, df):

@@ -115,8 +115,7 @@ class SuggestionRatings:
                 liste_film.append(json.loads(json_data_film.decode("utf-8")))
             base_object['rating_suggestion'] = liste_film
             liste_object.append(base_object)
-        path_file = os.path.join(os.path.join(settings.BASE_DIR, 'store'), 'SuggestionRating.json')
-        with open(path_file, 'w') as f:
+        with open(settings.FILE_PATH_SUGGESTION_RATING, 'w') as f:
             json.dump(liste_object, f, indent=4)
 
     def get_id_user(self):
