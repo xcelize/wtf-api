@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_multiple_model',
-    'django_celery_beat'
+    'django_celery_beat',
+    'django_celery_results'
 ]
 
 AUTH_USER_MODEL = "authenticate.User"
@@ -161,25 +162,25 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_IGNORE_RESULT = False
 CELERYD_PREFETCH_MULTIPLIER = 1
-CONCURRENCY = 8
+CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 
 if os.environ.get('ENV') == "PRODUCTION":
     DEBUG = False
-    BROKER_URL = os.environ['REDISTOGO_URL']
-    CELERY_RESULT_BACKEND = os.environ['REDISTOGO_URL']
+    BROKER_URL = os.environ.get("CLOUDAMQP_URL", "django://")
+    BROKER_POOL_LIMIT = 1
+    BROKER_CONNECTION_MAX_RETRIES = None
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATIC_URL = '/static/'
     # Extra places for collectstatic to find static files.
     '''db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)'''
 else:
+    CELERY_BROKER_URL = 'amqps://bkjyasck:WVFbuZEGBq-eQhsFxFQA9pbWv-35BT76@jellyfish.rmq.cloudamqp.com/bkjyasck'
     DEBUG = True
 
