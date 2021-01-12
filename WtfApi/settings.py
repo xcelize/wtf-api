@@ -18,6 +18,10 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+FILE_PATH_SUGGESTION_RATING = os.path.join(os.path.join(BASE_DIR, 'store'), 'SuggestionRating.json')
+FILE_PATH_RECOMMANDATION_FAVORIS = os.path.join(os.path.join(BASE_DIR, 'store'), 'RecommandationFavoris.json')
+FILE_PATH_TENDANCE = os.path.join(os.path.join(BASE_DIR, 'store'), 'Tendance.json')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -150,7 +154,7 @@ Parametrage du module djangorest
 '''
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20,
+    'PAGE_SIZE': 50,
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
@@ -173,7 +177,6 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 if os.environ.get('ENV') == "PRODUCTION":
     DEBUG = False
     CELERY_BROKER_URL = os.environ["CLOUDAMQP_URL"]
-    print(CELERY_BROKER_URL)
     BROKER_POOL_LIMIT = 1
     BROKER_CONNECTION_MAX_RETRIES = None
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
