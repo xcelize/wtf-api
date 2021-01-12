@@ -13,15 +13,6 @@
         },
         "favoris_suggestion": [
             {
-                "id_video": 6,
-                "titre": "Judgment Night",
-                "date_sortie": "1993-10-15",
-                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
-                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
-                "vo": "en",
-                "duree": 110
-            },
-            {
                 "id_video": 32022,
                 "titre": "Case Closed: Countdown to Heaven",
                 "date_sortie": "2001-04-21",
@@ -29,6 +20,15 @@
                 "plot": "As a pair of towers in Tokyo are being prepared for their grand opening, there is a series of murders of people connected to the towers. Conan suspects that the mysterious Syndicate may also be involved.",
                 "vo": "ja",
                 "duree": 100
+            },
+            {
+                "id_video": 6,
+                "titre": "Judgment Night",
+                "date_sortie": "1993-10-15",
+                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
+                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
+                "vo": "en",
+                "duree": 110
             },
             {
                 "id_video": 31995,
@@ -58,13 +58,13 @@
                 "duree": 80
             },
             {
-                "id_video": 2,
-                "titre": "Ariel",
-                "date_sortie": "1988-10-21",
-                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
-                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
-                "vo": "fi",
-                "duree": 73
+                "id_video": 32021,
+                "titre": "The Night Strangler",
+                "date_sortie": "1973-01-16",
+                "poster": "/ieFPQGxZG56uxxpwgHna1rMViWJ.jpg",
+                "plot": "",
+                "vo": "en",
+                "duree": 74
             },
             {
                 "id_video": 32008,
@@ -76,13 +76,13 @@
                 "duree": 77
             },
             {
-                "id_video": 32021,
-                "titre": "The Night Strangler",
-                "date_sortie": "1973-01-16",
-                "poster": "/ieFPQGxZG56uxxpwgHna1rMViWJ.jpg",
-                "plot": "",
-                "vo": "en",
-                "duree": 74
+                "id_video": 2,
+                "titre": "Ariel",
+                "date_sortie": "1988-10-21",
+                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
+                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
+                "vo": "fi",
+                "duree": 73
             }
         ]
     },
@@ -118,15 +118,6 @@
                 "duree": 108
             },
             {
-                "id_video": 6,
-                "titre": "Judgment Night",
-                "date_sortie": "1993-10-15",
-                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
-                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
-                "vo": "en",
-                "duree": 110
-            },
-            {
                 "id_video": 31999,
                 "titre": "Slippery Slope",
                 "date_sortie": "2006-10-06",
@@ -136,13 +127,22 @@
                 "duree": 80
             },
             {
-                "id_video": 2,
-                "titre": "Ariel",
-                "date_sortie": "1988-10-21",
-                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
-                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
-                "vo": "fi",
-                "duree": 73
+                "id_video": 6,
+                "titre": "Judgment Night",
+                "date_sortie": "1993-10-15",
+                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
+                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
+                "vo": "en",
+                "duree": 110
+            },
+            {
+                "id_video": 32021,
+                "titre": "The Night Strangler",
+                "date_sortie": "1973-01-16",
+                "poster": "/ieFPQGxZG56uxxpwgHna1rMViWJ.jpg",
+                "plot": "",
+                "vo": "en",
+                "duree": 74
             },
             {
                 "id_video": 32008,
@@ -154,13 +154,13 @@
                 "duree": 77
             },
             {
-                "id_video": 32021,
-                "titre": "The Night Strangler",
-                "date_sortie": "1973-01-16",
-                "poster": "/ieFPQGxZG56uxxpwgHna1rMViWJ.jpg",
-                "plot": "",
-                "vo": "en",
-                "duree": 74
+                "id_video": 2,
+                "titre": "Ariel",
+                "date_sortie": "1988-10-21",
+                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
+                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
+                "vo": "fi",
+                "duree": 73
             }
         ]
     },
@@ -187,15 +187,6 @@
                 "duree": 108
             },
             {
-                "id_video": 6,
-                "titre": "Judgment Night",
-                "date_sortie": "1993-10-15",
-                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
-                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
-                "vo": "en",
-                "duree": 110
-            },
-            {
                 "id_video": 31999,
                 "titre": "Slippery Slope",
                 "date_sortie": "2006-10-06",
@@ -203,6 +194,15 @@
                 "plot": "A cash strapped feminist filmmaker secretly takes a job directing a porn film in order to get her thesis film, \"Feminism For Dummies\" out of the lab. Soon, her own slumbering sexuality is awakened in surprising ways. This arouses the suspicion of her politically correct husband, Hugh, and leads to a madcap finale of mistaken identity that threatens to upend Gillian's best laid plans.",
                 "vo": "en",
                 "duree": 80
+            },
+            {
+                "id_video": 6,
+                "titre": "Judgment Night",
+                "date_sortie": "1993-10-15",
+                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
+                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
+                "vo": "en",
+                "duree": 110
             },
             {
                 "id_video": 32005,
@@ -247,15 +247,6 @@
         },
         "favoris_suggestion": [
             {
-                "id_video": 6,
-                "titre": "Judgment Night",
-                "date_sortie": "1993-10-15",
-                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
-                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
-                "vo": "en",
-                "duree": 110
-            },
-            {
                 "id_video": 31999,
                 "titre": "Slippery Slope",
                 "date_sortie": "2006-10-06",
@@ -265,13 +256,22 @@
                 "duree": 80
             },
             {
-                "id_video": 2,
-                "titre": "Ariel",
-                "date_sortie": "1988-10-21",
-                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
-                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
-                "vo": "fi",
-                "duree": 73
+                "id_video": 6,
+                "titre": "Judgment Night",
+                "date_sortie": "1993-10-15",
+                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
+                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
+                "vo": "en",
+                "duree": 110
+            },
+            {
+                "id_video": 32021,
+                "titre": "The Night Strangler",
+                "date_sortie": "1973-01-16",
+                "poster": "/ieFPQGxZG56uxxpwgHna1rMViWJ.jpg",
+                "plot": "",
+                "vo": "en",
+                "duree": 74
             },
             {
                 "id_video": 32008,
@@ -283,13 +283,13 @@
                 "duree": 77
             },
             {
-                "id_video": 32021,
-                "titre": "The Night Strangler",
-                "date_sortie": "1973-01-16",
-                "poster": "/ieFPQGxZG56uxxpwgHna1rMViWJ.jpg",
-                "plot": "",
-                "vo": "en",
-                "duree": 74
+                "id_video": 2,
+                "titre": "Ariel",
+                "date_sortie": "1988-10-21",
+                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
+                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
+                "vo": "fi",
+                "duree": 73
             },
             {
                 "id_video": 32022,
@@ -343,13 +343,13 @@
                 "duree": 80
             },
             {
-                "id_video": 2,
-                "titre": "Ariel",
-                "date_sortie": "1988-10-21",
-                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
-                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
-                "vo": "fi",
-                "duree": 73
+                "id_video": 32021,
+                "titre": "The Night Strangler",
+                "date_sortie": "1973-01-16",
+                "poster": "/ieFPQGxZG56uxxpwgHna1rMViWJ.jpg",
+                "plot": "",
+                "vo": "en",
+                "duree": 74
             },
             {
                 "id_video": 32008,
@@ -361,13 +361,13 @@
                 "duree": 77
             },
             {
-                "id_video": 32021,
-                "titre": "The Night Strangler",
-                "date_sortie": "1973-01-16",
-                "poster": "/ieFPQGxZG56uxxpwgHna1rMViWJ.jpg",
-                "plot": "",
-                "vo": "en",
-                "duree": 74
+                "id_video": 2,
+                "titre": "Ariel",
+                "date_sortie": "1988-10-21",
+                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
+                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
+                "vo": "fi",
+                "duree": 73
             },
             {
                 "id_video": 32022,
@@ -412,31 +412,13 @@
                 "duree": 93
             },
             {
-                "id_video": 2,
-                "titre": "Ariel",
-                "date_sortie": "1988-10-21",
-                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
-                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
-                "vo": "fi",
-                "duree": 73
-            },
-            {
-                "id_video": 6,
-                "titre": "Judgment Night",
-                "date_sortie": "1993-10-15",
-                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
-                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
-                "vo": "en",
-                "duree": 110
-            },
-            {
-                "id_video": 32008,
-                "titre": "Baby Boy Frankie",
-                "date_sortie": "1961-03-20",
-                "poster": "/nHbUIcIogKUByyHA87efM0BOYZ1.jpg",
-                "plot": "Le tueur \u00e0 gages Frank Bono revient \u00e0 New York, la veille de No\u00ebl, pour ex\u00e9cuter un contrat : il doit imp\u00e9rativement liquider un petit \"ca\u00efd\" d\u00e9sormais ind\u00e9sirable. Il s'entoure de mille pr\u00e9cautions et surveille attentivement sa future victime. Mais, il va rencontrer de vieilles connaissances, dont Lorrie, qu'il semble avoir aim\u00e9 autrefois. Il prend contact avec Big Ralph qui doit lui procurer l'arme du meurtre, mais la rencontre avec celui-ci tourne mal. Frank finit par assassiner Big Ralph avec le fil d'un t\u00e9l\u00e9phone. D\u00e9sormais menac\u00e9, Frank cherche \u00e0 fuir avec Lorrie et ne veut plus remplir ses engagements. La fille refuse : Frank se ravise et finit par abattre le gangster. Il pr\u00e9vient ses commanditaires de l'accomplissement en bonne et due forme de son travail, mais au moment d'\u00eatre pay\u00e9, il est pris en chasse, tu\u00e9 et abandonn\u00e9 dans un marais.",
-                "vo": "en",
-                "duree": 77
+                "id_video": 32022,
+                "titre": "Case Closed: Countdown to Heaven",
+                "date_sortie": "2001-04-21",
+                "poster": "/y3ErxTGas2Bi95XPLoE4Jc6AJzM.jpg",
+                "plot": "As a pair of towers in Tokyo are being prepared for their grand opening, there is a series of murders of people connected to the towers. Conan suspects that the mysterious Syndicate may also be involved.",
+                "vo": "ja",
+                "duree": 100
             },
             {
                 "id_video": 32021,
@@ -448,13 +430,31 @@
                 "duree": 74
             },
             {
-                "id_video": 32022,
-                "titre": "Case Closed: Countdown to Heaven",
-                "date_sortie": "2001-04-21",
-                "poster": "/y3ErxTGas2Bi95XPLoE4Jc6AJzM.jpg",
-                "plot": "As a pair of towers in Tokyo are being prepared for their grand opening, there is a series of murders of people connected to the towers. Conan suspects that the mysterious Syndicate may also be involved.",
-                "vo": "ja",
-                "duree": 100
+                "id_video": 32008,
+                "titre": "Baby Boy Frankie",
+                "date_sortie": "1961-03-20",
+                "poster": "/nHbUIcIogKUByyHA87efM0BOYZ1.jpg",
+                "plot": "Le tueur \u00e0 gages Frank Bono revient \u00e0 New York, la veille de No\u00ebl, pour ex\u00e9cuter un contrat : il doit imp\u00e9rativement liquider un petit \"ca\u00efd\" d\u00e9sormais ind\u00e9sirable. Il s'entoure de mille pr\u00e9cautions et surveille attentivement sa future victime. Mais, il va rencontrer de vieilles connaissances, dont Lorrie, qu'il semble avoir aim\u00e9 autrefois. Il prend contact avec Big Ralph qui doit lui procurer l'arme du meurtre, mais la rencontre avec celui-ci tourne mal. Frank finit par assassiner Big Ralph avec le fil d'un t\u00e9l\u00e9phone. D\u00e9sormais menac\u00e9, Frank cherche \u00e0 fuir avec Lorrie et ne veut plus remplir ses engagements. La fille refuse : Frank se ravise et finit par abattre le gangster. Il pr\u00e9vient ses commanditaires de l'accomplissement en bonne et due forme de son travail, mais au moment d'\u00eatre pay\u00e9, il est pris en chasse, tu\u00e9 et abandonn\u00e9 dans un marais.",
+                "vo": "en",
+                "duree": 77
+            },
+            {
+                "id_video": 6,
+                "titre": "Judgment Night",
+                "date_sortie": "1993-10-15",
+                "poster": "/rYFAvSPlQUCebayLcxyK79yvtvV.jpg",
+                "plot": "While racing to a boxing match, Frank, Mike, John and Rey get more than they bargained for. A wrong turn lands them directly in the path of Fallon, a vicious, wise-cracking drug lord. After accidentally witnessing Fallon murder a disloyal henchman, the four become his unwilling prey in a savage game of cat & mouse as they are mercilessly stalked through the urban jungle in this taut suspense drama",
+                "vo": "en",
+                "duree": 110
+            },
+            {
+                "id_video": 2,
+                "titre": "Ariel",
+                "date_sortie": "1988-10-21",
+                "poster": "/ojDg0PGvs6R9xYFodRct2kdI6wC.jpg",
+                "plot": "Taisto Kasurinen is a Finnish coal miner whose father has just committed suicide and who is framed for a crime he did not commit. In jail, he starts to dream about leaving the country and starting a new life. He escapes from prison but things don't go as planned...",
+                "vo": "fi",
+                "duree": 73
             },
             {
                 "id_video": 32012,
