@@ -183,7 +183,7 @@ if GS:
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     GS_BUCKET_NAME = 'bucket-wtf-api'
     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        os.path.join(os.path.join(BASE_DIR, 'WtfAPI'), "bright-spanner-301516-62755aeb2b95.json")
+        os.path.join(os.path.join(BASE_DIR, 'store'), "bright-spanner-301516-62755aeb2b95.json")
     )
 
 
