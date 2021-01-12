@@ -1,2 +1,2 @@
 web: gunicorn WtfApi.wsgi
-worker: celery --app WtfApi worker
+worker: celery --app WtfApi worker --loglevel=INFO
