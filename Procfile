@@ -1,1 +1,2 @@
-web: honcho start -f Procfile.real
+web: gunicorn WtfApi.wsgi
+
