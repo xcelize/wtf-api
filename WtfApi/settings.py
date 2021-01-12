@@ -171,7 +171,7 @@ CONCURRENCY = 8
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 
 if os.environ.get('ENV') == "PRODUCTION":
-    DEBUG = False
+    DEBUG = True
     BROKER_URL = os.environ['REDIS_URL']
     CELERY_RESULT_BACKEND = os.environ['REDIS_URL']
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
