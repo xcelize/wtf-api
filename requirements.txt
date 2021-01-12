@@ -9,10 +9,12 @@ click==7.1.2
 click-didyoumean==0.0.3
 click-plugins==1.1.1
 click-repl==0.1.6
+colorama==0.4.4
 dj-database-url==0.5.0
 Django==3.1.4
 django-celery==3.3.1
 django-celery-beat==2.1.0
+django-celery-results==2.0.0
 django-cors-headers==3.6.0
 django-filter==2.4.0
 django-jazzmin==2.4.1
@@ -22,6 +24,7 @@ django-timezone-field==4.1.1
 djangorestframework==3.12.2
 djangorestframework-jwt==1.11.0
 gunicorn==20.0.4
+honcho==1.0.1
 idna==2.10
 ifilter==0.2
 kombu==5.0.2
@@ -41,4 +44,3 @@ urllib3==1.26.2
 vine==5.0.0
 wcwidth==0.2.5
 whitenoise==5.2.0
-'honcho==1.0.1' 
