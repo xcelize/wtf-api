@@ -1,3 +1,3 @@
 web: gunicorn WtfApi.wsgi
-worker: celery -A worker --loglevel=info
-beat: python manage.py celery beat --loglevel=info
+worker: celery -A WtfApi worker --loglevel=info
+beat: celery -A WtfApi celery beat --loglevel=info
