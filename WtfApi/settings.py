@@ -161,7 +161,8 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -171,9 +172,9 @@ CONCURRENCY = 8
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 
 if os.environ.get('ENV') == "PRODUCTION":
-    DEBUG = True
-    BROKER_URL = os.environ['REDIS_URL']
-    CELERY_RESULT_BACKEND = os.environ['REDIS_URL']
+    DEBUG = False
+    BROKER_URL = os.environ['REDISTOGO_URL']
+    CELERY_RESULT_BACKEND = os.environ['REDISTOGO_URL']
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATIC_URL = '/static/'
     # Extra places for collectstatic to find static files.
@@ -181,5 +182,4 @@ if os.environ.get('ENV') == "PRODUCTION":
     DATABASES['default'].update(db_from_env)'''
 else:
     DEBUG = True
-    CELERY_BROKER_URL = 'redis://localhost:6379'
-    CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+
