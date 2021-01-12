@@ -2,13 +2,16 @@ import json
 import os
 import itertools
 from django.conf import settings
+from django.core.files.storage import default_storage
 from django_filters import rest_framework as filters
 from drf_multiple_model.views import ObjectMultipleModelAPIView
-from rest_framework import permissions
+from rest_framework import permissions, status
+from rest_framework.exceptions import APIException
 from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .ServiceUnreachable import ServiceUnavailable
 from .Suggestion.RecommandationFavoris import RecommandationFavoris
 from .Suggestion.Tendance import Tendance
 from .Suggestion.SuggestionRatings import SuggestionRatings
@@ -114,8 +117,10 @@ class UpdateRatingSaison(UpdateAPIView):
         return RatingSaison.objects.all()
 
 
+
 class GetUserSuggestionRating(APIView):
 
+    gs_filename = "RecommandationFavoris.json"
     file_path = settings.FILE_PATH_SUGGESTION_RATING
     permission_classes = [permissions.IsAuthenticated]
 
@@ -124,36 +129,54 @@ class GetUserSuggestionRating(APIView):
     # recuperer son objet
     # servir son objet
     def get(self, request, format=None):
+        if not default_storage.exists(self.gs_filename) or not os.path.exists(self.file_path):
+            return Response(status=status.HTTP_404_NOT_FOUND)
         user = request.user
-        with open(self.file_path, 'r') as f:
-            json_data = json.load(f)
-            l = [element for element in filter(lambda x: (x['user']['id'] is user.id), json_data)]
-        return Response(l[0])
+        if settings.GS:
+            with default_storage.open(self.gs_filename) as f:
+                json_data = json.load(f)
+        else:
+            with open(self.file_path, 'r') as f:
+                json_data = json.load(f)
+        li = [element for element in filter(lambda x: (x['user']['id'] is user.id), json_data)]
+        return Response(li[0])
 
 
 class GetUserSuggestionFavoris(APIView):
 
+    gs_filename = "SuggestionRatings.json"
     file_path = settings.FILE_PATH_RECOMMANDATION_FAVORIS
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, format=None):
+        if not default_storage.exists(self.gs_filename) or not os.path.exists(self.file_path):
+            return Response(status=status.HTTP_404_NOT_FOUND)
         user = request.user
-        with open(self.file_path, 'r') as f:
-            json_data = json.load(f)
-            l = [element for element in filter(lambda x: (x['user']['id'] is user.id), json_data)]
-        return Response(l[0])
+        if settings.GS:
+            with default_storage.open(self.gs_filename) as f:
+                json_data = json.load(f)
+        else:
+            with open(self.file_path, 'r') as f:
+                json_data = json.load(f)
+        li = [element for element in filter(lambda x: (x['user']['id'] is user.id), json_data)]
+        return Response(li[0])
 
 
 class GetTendanceAPI(APIView):
 
     file_path = settings.FILE_PATH_TENDANCE
+    gs_filename = "Tendance.json"
 
     def get(self, request, format=None):
-        with open(self.file_path, 'r') as f:
-            json_data = json.load(f)
+        if not default_storage.exists(self.gs_filename) or not os.path.exists(self.file_path):
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        if settings.GS:
+            with default_storage.open(self.gs_filename) as f:
+                json_data = json.load(f)
+        else:
+            with open(self.file_path, 'r') as f:
+                json_data = json.load(f)
         return Response(json_data)
-
-
 
 # TODO
 class VideoAPIView(ObjectMultipleModelAPIView):

@@ -1,9 +1,8 @@
 import json
 import os
-
 from authenticate.models import FilmFavoris
 from django.conf import settings
-
+from django.core.files.storage import default_storage
 from ..models import Films
 from ..serializers import SpecificFilmSerializer
 from django_pandas.io import read_frame, pd, get_related_model
@@ -15,6 +14,7 @@ from rest_framework.renderers import JSONRenderer
 class RecommandationFavoris:
 
     def __init__(self):
+
         self.id_users = list()
         self.list_favoris_recommand = dict()
         self.last_id_movie_favoris = None
@@ -66,6 +66,10 @@ class RecommandationFavoris:
         return last_id
 
     def get_list_recommand_favoris(self):
+        self._serve()
+        return self.list_favoris_recommand
+
+    def _serve(self):
         self.id_users = self.get_id_user()
         liste_object = []
         for _id in self.id_users:
@@ -82,8 +86,16 @@ class RecommandationFavoris:
                 liste_film.append(json.loads(json_data_film.decode("utf-8")))
             base_object['favoris_suggestion'] = liste_film
             liste_object.append(base_object)
+        if settings.GS:
+            self._to_google(liste_object)
+        else:
+            self._to_local(liste_object)
+        return self.list_favoris_recommand
+
+    def _to_google(self, liste_object):
+        with default_storage.open('RecommandationFavoris.json', 'w') as f:
+            json.dump(liste_object, f, indent=4)
+
+    def _to_local(self, liste_object):
         with open(settings.FILE_PATH_RECOMMANDATION_FAVORIS, 'w') as f:
             json.dump(liste_object, f, indent=4)
-        # self.list_favoris_recommand[_id] = top_10
-
-        return self.list_favoris_recommand

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import datetime
 import os
 from pathlib import Path
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import dj_database_url
@@ -166,6 +167,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
+# CELERY COMMON SETTINGS
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -173,6 +175,17 @@ CELERY_IGNORE_RESULT = False
 CELERYD_PREFETCH_MULTIPLIER = 1
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
+
+
+#GS COMMON STORAGE
+GS = True
+if GS:
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    GS_BUCKET_NAME = 'bucket-wtf-api'
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        os.path.join(os.path.join(BASE_DIR, 'WtfAPI'), "bright-spanner-301516-62755aeb2b95.json")
+    )
+
 
 if os.environ.get('ENV') == "PRODUCTION":
     DEBUG = False

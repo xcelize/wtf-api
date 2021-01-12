@@ -2,6 +2,7 @@ import json
 import os
 
 from django.conf import settings
+from django.core.files.storage import default_storage
 from django_pandas.io import read_frame, pd, get_related_model
 from rest_framework.renderers import JSONRenderer
 
@@ -115,6 +116,17 @@ class SuggestionRatings:
                 liste_film.append(json.loads(json_data_film.decode("utf-8")))
             base_object['rating_suggestion'] = liste_film
             liste_object.append(base_object)
+        if settings.GS:
+            self._to_google(liste_object)
+        else:
+            self._to_local(liste_object)
+        return self.list_suggest_score_films
+
+    def _to_google(self, liste_object):
+        with default_storage.open('SuggestionRatings.json', 'w') as f:
+            json.dump(liste_object, f, indent=4)
+
+    def _to_local(self, liste_object):
         with open(settings.FILE_PATH_SUGGESTION_RATING, 'w') as f:
             json.dump(liste_object, f, indent=4)
 

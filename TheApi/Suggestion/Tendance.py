@@ -1,3 +1,4 @@
+from django.core.files.storage import default_storage
 from django_pandas.io import read_frame, pd, get_related_model
 from ..models import RatingFilms, Films
 from django.core import serializers
@@ -45,8 +46,18 @@ class Tendance:
             filmSerializer = FilmSerializer(i)
             json_data = JSONRenderer().render(filmSerializer.data)
             liste.append(json.loads(json_data.decode("utf-8")))
+        if settings.GS:
+            self._to_google(liste)
+        else:
+            self._to_local(liste)
+
+    def _to_google(self, liste_object):
+        with default_storage.open('Tendance.json', 'w') as f:
+            json.dump(liste_object, f, indent=4)
+
+    def _to_local(self, liste_object):
         with open(settings.FILE_PATH_TENDANCE, 'w') as f:
-            json.dump(liste, f, indent=4)
+            json.dump(liste_object, f, indent=4)
 
     def nb_ratings_df(self, df):
         return df.count().to_frame(name='nb_ratings')
