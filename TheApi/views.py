@@ -116,7 +116,7 @@ class UpdateRatingSaison(UpdateAPIView):
 
 class GetUserSuggestionRating(APIView):
 
-    file_path = os.path.join(settings.BASE_DIR, 'SuggestionRating.json')
+    file_path = os.path.join(os.path.join(settings.BASE_DIR, 'store'), 'SuggestionRating.json')
     permission_classes = [permissions.IsAuthenticated]
 
     # ouvrir le fichier
