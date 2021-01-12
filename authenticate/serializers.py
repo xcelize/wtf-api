@@ -1,8 +1,8 @@
 from .models import User, FilmFavoris, SerieFavoris
-from rest_framework import serializers
+from rest_framework import serializers, exceptions
 from TheApi.serializers import FilmSerializer, SerieSerializer
 from TheApi.models import Films
-
+import django.contrib.auth.password_validation as validators
 
 class FilmFavorisSerializer(serializers.ModelSerializer):
 
@@ -63,6 +63,24 @@ class SerieFavorisForGet(serializers.ModelSerializer):
         ]
 
 
+class SpecificUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = [
+            'id',
+            'email',
+            'nom',
+            'prenom',
+            'date_inscription',
+            'date_naissance',
+            'email',
+            'genre',
+            'telephone',
+            'pays'
+        ]
+
+
 class UserSerializer(serializers.ModelSerializer):
 
     film_favoris = FilmFavorisForGet(source="filmfavoris_set", many=True, read_only=True)
@@ -92,9 +110,14 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop("password")
         user = super().create(validated_data)
-        user.set_password(password)
         user.save()
         return user
+
+    def validate(self, attrs):
+
+        validators.validate_password(attrs['password'])
+
+        return attrs
 
 
 class UpdataUserSerializer(serializers.ModelSerializer):

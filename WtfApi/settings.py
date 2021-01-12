@@ -26,7 +26,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'c7b#iil47q6bu!cb=8gbtb(midwevo7g0pw1)fbr4saa%!q((e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -45,7 +44,8 @@ INSTALLED_APPS = [
     'TheApi',
     'rest_framework',
     'django_filters',
-    'drf_multiple_model'
+    'drf_multiple_model',
+    'django_celery_beat'
 ]
 
 AUTH_USER_MODEL = "authenticate.User"
@@ -105,6 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTION': {
+            'min_length': 9
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -141,6 +144,9 @@ JWT_AUTH = {
         'authenticate.utils.jwt_response_payload_handler'
 }
 
+'''
+Parametrage du module djangorest
+'''
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 50,
@@ -156,15 +162,24 @@ REST_FRAMEWORK = {
 }
 
 
-if DEBUG is False:
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_IGNORE_RESULT = False
+CELERYD_PREFETCH_MULTIPLIER = 1
+CONCURRENCY = 8
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 
-    #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+if os.environ.get('ENV') == "PRODUCTION":
+    DEBUG = False
+    BROKER_URL = os.environ['REDIS_URL']
+    CELERY_RESULT_BACKEND = os.environ['REDIS_URL']
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATIC_URL = '/static/'
     # Extra places for collectstatic to find static files.
-    '''STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )'''
     '''db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)'''
-
+else:
+    DEBUG = True
+    CELERY_BROKER_URL = 'redis://localhost:6379'
+    CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'

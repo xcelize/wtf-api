@@ -1,10 +1,23 @@
-from .models import Films, Series, RatingFilms, RatingSaison, Categories
-from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
-from .serializers import CategorieSerializer, FilmSerializer, SerieSerializer, RatingSerializer, RatingSaisonSerializer
-from rest_framework import permissions
-from .customfilters import FilmFilters, SerieFilters
-from drf_multiple_model.views import ObjectMultipleModelAPIView
+import json
+import os
+import itertools
+from django.conf import settings
 from django_filters import rest_framework as filters
+from drf_multiple_model.views import ObjectMultipleModelAPIView
+from rest_framework import permissions
+from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, CreateAPIView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .Suggestion.RecommandationFavoris import RecommandationFavoris
+from .Suggestion.Tendance import Tendance
+from .Suggestion.SuggestionRatings import SuggestionRatings
+
+from .customfilters import FilmFilters, SerieFilters
+from .models import Films, Series, RatingFilms, RatingSaison, Categories
+from .serializers import CategorieSerializer, FilmSerializer, SerieSerializer, RatingSerializer, RatingSaisonSerializer
+from .tasks import MakeSuggestion
+
 
 
 class isOwnerOrReadOnly(permissions.BasePermission):
@@ -99,6 +112,24 @@ class UpdateRatingSaison(UpdateAPIView):
 
     def get_queryset(self):
         return RatingSaison.objects.all()
+
+
+class GetUserSuggestionRating(APIView):
+
+    file_path = os.path.join(settings.BASE_DIR, 'SuggestionRating.json')
+    permission_classes = [permissions.IsAuthenticated]
+
+    # ouvrir le fichier
+    # chercher l'utilisateur connecté
+    # recuperer son objet
+    # servir son objet
+    def get(self, request, format=None):
+        user = request.user
+        with open(self.file_path, 'r') as f:
+            json_data = json.load(f)
+            l = [element for element in filter(lambda x: (x['user']['id'] is user.id), json_data)]
+        return Response(l[0])
+
 
 
 # TODO
