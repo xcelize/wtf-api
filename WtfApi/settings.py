@@ -12,11 +12,16 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import datetime
 import os
 from pathlib import Path
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+FILE_PATH_SUGGESTION_RATING = os.path.join(os.path.join(BASE_DIR, 'store'), 'SuggestionRating.json')
+FILE_PATH_RECOMMANDATION_FAVORIS = os.path.join(os.path.join(BASE_DIR, 'store'), 'RecommandationFavoris.json')
+FILE_PATH_TENDANCE = os.path.join(os.path.join(BASE_DIR, 'store'), 'Tendance.json')
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +31,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'c7b#iil47q6bu!cb=8gbtb(midwevo7g0pw1)fbr4saa%!q((e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -45,7 +49,9 @@ INSTALLED_APPS = [
     'TheApi',
     'rest_framework',
     'django_filters',
-    'drf_multiple_model'
+    'drf_multiple_model',
+    'django_celery_beat',
+    'django_celery_results'
 ]
 
 AUTH_USER_MODEL = "authenticate.User"
@@ -105,6 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTION': {
+            'min_length': 9
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -141,9 +150,12 @@ JWT_AUTH = {
         'authenticate.utils.jwt_response_payload_handler'
 }
 
+'''
+Parametrage du module djangorest
+'''
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 50,
+    'PAGE_SIZE': 20,
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
@@ -155,16 +167,37 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
+# CELERY COMMON SETTINGS
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_IGNORE_RESULT = False
+CELERYD_PREFETCH_MULTIPLIER = 1
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 
-if DEBUG is False:
 
-    #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#GS COMMON STORAGE
+GS = True
+if GS:
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    GS_BUCKET_NAME = 'bucket-wtf-api'
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        os.path.join(os.path.join(BASE_DIR, 'store'), "bright-spanner-301516-62755aeb2b95.json")
+    )
+
+
+if os.environ.get('ENV') == "PRODUCTION":
+    DEBUG = False
+    CELERY_BROKER_URL = os.environ["CLOUDAMQP_URL"]
+    BROKER_POOL_LIMIT = 1
+    BROKER_CONNECTION_MAX_RETRIES = None
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATIC_URL = '/static/'
     # Extra places for collectstatic to find static files.
-    '''STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )'''
     '''db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)'''
+else:
+    CELERY_BROKER_URL = 'amqps://bkjyasck:WVFbuZEGBq-eQhsFxFQA9pbWv-35BT76@jellyfish.rmq.cloudamqp.com/bkjyasck'
+    DEBUG = True
 

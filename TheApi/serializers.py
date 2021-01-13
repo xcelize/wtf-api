@@ -123,6 +123,22 @@ class FilmSerializer(serializers.ModelSerializer):
         ]
 
 
+class SpecificFilmSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Films
+        fields = [
+            'id_video',
+            'titre',
+            'date_sortie',
+            'poster',
+            'plot',
+            'vo',
+            'duree',
+        ]
+
+
+
 class SerieSerializer(serializers.ModelSerializer):
 
     categories = CategorieSerializer(many=True)
@@ -150,6 +166,9 @@ class SerieSerializer(serializers.ModelSerializer):
             'saisons'
         ]
 
+    '''
+    Nous permet de représenter nos saisons dans les saisons par numéro de saison
+    '''
     def to_representation(self, instance):
         response = super(SerieSerializer, self).to_representation(instance)
         response['saisons'] = sorted(response['saisons'], key=lambda x: x['num_saison'])

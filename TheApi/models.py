@@ -103,6 +103,7 @@ class Films(models.Model):
         db_table = 'films'
 
 
+
 class RatingFilms(models.Model):
 
     id = models.AutoField(primary_key=True, auto_created=True)
