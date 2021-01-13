@@ -1,37 +1,89 @@
-from django.test import TestCase
 from django.urls import include, path, reverse
-from rest_framework.test import APITestCase, URLPatternsTestCase, force_authenticate
+from rest_framework.test import APITestCase, URLPatternsTestCase, APIRequestFactory, force_authenticate, APIClient
+from TheApi.views import CreateRatingFilm
 from authenticate.models import User
+from authenticate.views import CreateFavorisFilmView
 
 
 class CreateFilmRatingTestCase(APITestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(CreateFilmRatingTestCase, cls).setUpClass()
+        # create a User model object in temporary database.
+        user = User(email='tom', password='tom')
+        user.save()
+        # get employee user.
+        CreateFilmRatingTestCase.user = User.objects.get(email='tom')
+        print(user)
+
     def test_is_not_authorized(self):
         response = self.client.post(reverse('create_film_rating'))
         print(response.data)
         self.assertEqual(response.status_code, 401)
 
     def test_is_authorized(self):
-        user = User.objects.get(email='baptiste@baptiste.fr')
+        factory = APIRequestFactory()
+        view = CreateRatingFilm.as_view()
 
         # Make an authenticated request to the view...
-        request = self.client.post(reverse('create_film_rating'))
-        force_authenticate(request, user=user)
-        print(request)
-        self.assertEqual(request.data, 401)
+        request = factory.post(reverse('create_film_rating'))
+        force_authenticate(request, user=self.user)
+        response = view(request)
+        self.assertNotEqual(response, 401)
 
 
-'''class ListFilmsTestCase(APITestCase):
+class CreateFavorisFilmTestCase(APITestCase):
 
-    def setUp(self):
-        Films(id_video = 1, titre = 'bibi', date_sortie = datetime.now(), poster = 'img.jpg', plot ='description', vo ='fr', duree=120).save()
+    @classmethod
+    def setUpClass(cls):
+        super(CreateFavorisFilmTestCase, cls).setUpClass()
+        # create a User model object in temporary database.
+        user = User(email='tom', password='tom')
+        user.save()
+        # get employee user.
+        CreateFavorisFilmTestCase.user = User.objects.get(email='tom')
+        print(user)
 
-    def test_list_films(self):
-        url = reverse('list_film')
-        response = self.client.get(url, format='json')
-        self.assertEqual(response.status_code, 200)
+    def test_is_not_authorized(self):
+        response = self.client.post(reverse('create_favoris_film'))
+        print(response.data)
+        self.assertEqual(response.status_code, 401)
 
-#class ListCategoriesTestCase(APITestCase):
-  #  def test_list_categories(self):
-   #     url = reverse('list_categories')
-    #    response = self.client.get(url, format='json')
-     #   self.assertEqual(response.status_code, 200)'''
+    def test_is_authorized(self):
+        factory = APIRequestFactory()
+        view = CreateFavorisFilmView.as_view()
+
+        # Make an authenticated request to the view...
+        request = factory.post(reverse('create_favoris_film'))
+        force_authenticate(request, user=self.user)
+        response = view(request)
+        self.assertNotEqual(response, 401)
+
+
+class CreateFavorisSerieTestCase(APITestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(CreateFavorisSerieTestCase, cls).setUpClass()
+        # create a User model object in temporary database.
+        user = User(email='tom', password='tom')
+        user.save()
+        # get employee user.
+        CreateFavorisSerieTestCase.user = User.objects.get(email='tom')
+        print(user)
+
+    def test_is_not_authorized(self):
+        response = self.client.post(reverse('create_favoris_serie'))
+        print(response.data)
+        self.assertEqual(response.status_code, 401)
+
+    def test_is_authorized(self):
+        factory = APIRequestFactory()
+        view = CreateFavorisFilmView.as_view()
+
+        # Make an authenticated request to the view...
+        request = factory.post(reverse('create_favoris_serie'))
+        force_authenticate(request, user=self.user)
+        response = view(request)
+        self.assertNotEqual(response, 401)
