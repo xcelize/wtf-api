@@ -162,6 +162,7 @@ class Plateformes(models.Model):
     id_plateforme = models.IntegerField(primary_key=True)
     nom = models.CharField(max_length=254, blank=True, null=True)
     logo = models.CharField(max_length=254, blank=True, null=True)
+    lien = models.CharField(max_length=254, blank=True, null=True)
 
     class Meta:
         managed = False
